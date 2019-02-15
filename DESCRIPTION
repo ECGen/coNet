@@ -1,10 +1,10 @@
-Package: test
+Package: coNet
 Type: Package
-Title: What the package does (short line)
-Version: 1.0
+Title: Create and analyze network models based on co-occurrence data
+Version: 0.1
 Date: 2019-02-15
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Author: Matthew K. Lau
+Maintainer: Matthew K. Lau <matthewklau@fas.harvard.edu>
+Description: A toolbox for modeling and analyzing ecological networks.
+License: GPL3
 RoxygenNote: 6.0.1
