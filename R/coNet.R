@@ -25,8 +25,7 @@
 #' ##-- ==>  Define data, use random,
 #' ##--	or do  help(data=index)  for the standard data sets.
 #' 
-coNet <- 
-function(x = "co-occurrence matrix",  ci.p = 95, 
+coNet <- function(x = "co-occurrence matrix",  ci.p = 95, 
                    conditional = TRUE, scale = FALSE, signs = FALSE){
     Z <- qnorm((1 - ci.p/100)/2, lower.tail = FALSE)
     if (class(x) == "data.frame"){x <- as.matrix(x)}
