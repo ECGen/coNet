@@ -12,7 +12,8 @@ coNet(x = "co-occurrence matrix", ci.p = 95, conditional = TRUE,
 species in columns.}
 
 \item{ci.p}{Confidence interval probability used for edge removal
-in percent (e.g. use 95 for 95%)}
+in percent (e.g. use 95 for a nintey-five percent confidence
+interval)}
 
 \item{conditional}{LOGICAL: should conditional probabilities be used?}
 
