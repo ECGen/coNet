@@ -17,6 +17,7 @@
 #' ##---- Should be DIRECTLY executable !! ----
 #' ##-- ==>  Define data, use random,
 #' ##--	or do  help(data=index)  for the standard data sets.
+#' @export minNet
 minNet <-
 function(x, FUN = 'cdNet', alpha = 0.05){
     thresh <- start

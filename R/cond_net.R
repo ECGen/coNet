@@ -16,7 +16,7 @@
 #' ##---- Should be DIRECTLY executable !! ----
 #' ##-- ==>  Define data, use random,
 #' ##--	or do  help(data=index)  for the standard data sets.
-#' 
+#' @export cond_net
 cond_net <-
 function(x){
     out <- matrix(0, nrow = ncol(x), ncol = ncol(x))

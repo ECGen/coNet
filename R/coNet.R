@@ -25,7 +25,7 @@
 #' ##---- Should be DIRECTLY executable !! ----
 #' ##-- ==>  Define data, use random,
 #' ##--	or do  help(data=index)  for the standard data sets.
-#' 
+#' @export coNet
 coNet <- function(x = "co-occurrence matrix",  ci.p = 95, 
                    conditional = TRUE, scale = FALSE, signs = FALSE){
     Z <- qnorm((1 - ci.p/100)/2, lower.tail = FALSE)

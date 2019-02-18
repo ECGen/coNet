@@ -27,6 +27,7 @@
 #' ##-- ==>  Define data, use random,
 #' ##--	or do  help(data=index)  for the standard data sets.
 #' 
+#' @export cnm.test
 cnm.test <-
 function(com, method = 'r1', 
                      nits = 5000, burn = 500, thin = 10, threshold = 0, 

@@ -24,6 +24,7 @@
 #' ##-- ==>  Define data, use random,
 #' ##--	or do  help(data=index)  for the standard data sets.
 #' 
+#' @export netMean
 netMean <-
 function(x, zero.na = TRUE){
     x <- Reduce("+", x) / sum(unlist(x))

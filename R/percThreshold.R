@@ -33,6 +33,7 @@
 #'     return(out)
 #'   }
 #' 
+#' @export percThreshold
 percThreshold <-
 function(x = 'network matrix',step.size = 0.01){
   no.c <- no.clusters(graph.adjacency(x,weighted = TRUE))
