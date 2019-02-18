@@ -7,7 +7,8 @@
 #' @param x A co-occurrence matrix with observations in rows and
 #' species in columns.
 #' @param ci.p Confidence interval probability used for edge removal
-#' in percent (e.g. use 95 for 95%)
+#' in percent (e.g. use 95 for a nintey-five percent confidence
+#' interval)
 #' @param conditional LOGICAL: should conditional probabilities be used?
 #' @param scale LOGICAL: should values be rescaled such that the
 #' number of co-occurrences is divided by the total number of species?
