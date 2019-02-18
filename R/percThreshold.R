@@ -7,9 +7,6 @@
 #' 
 #' @param x A network in matrix form.
 #' @param step.size The increment to use in determining the threshold.
-#' @return %% ~Describe the value returned %% If it is a LIST, use %%
-#' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-#' 'comp2'} %% ...
 #' @note %% ~~further notes~~
 #' @author Matthew K. Lau 
 #' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
