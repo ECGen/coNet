@@ -25,7 +25,6 @@ species co-occurrences.
 ##---- Should be DIRECTLY executable !! ----
 ##-- ==>  Define data, use random,
 ##--	or do  help(data=index)  for the standard data sets.
-
 }
 \references{
 %% ~put references to the literature/web site here ~
