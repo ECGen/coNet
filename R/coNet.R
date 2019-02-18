@@ -44,7 +44,7 @@ coNet <- function(x = "co-occurrence matrix",  ci.p = 95,
     net <- ab
     net[ab <= ci.u & ab >= ci.l] <- 0
     if (scale){net <- net / nrow(x)}
-    if (return.signs){
+    if (signs){
         net[ab > ci.u] <- net[ab > ci.u] * 1
         net[ab < ci.l] <- net[ab < ci.l] * -1
     }
