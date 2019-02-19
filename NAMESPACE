@@ -3,6 +3,7 @@
 export(cnm.test)
 export(coNet)
 export(cond_net)
+export(cond_prob)
 export(minNet)
 export(netDist)
 export(netMean)
