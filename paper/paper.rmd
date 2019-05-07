@@ -30,6 +30,22 @@ bibliography: paper.bib
   Araujo et al. 2011 expanded with the application of Bayesian
   probability.
 
+## Quick review of other packages available
+
+```{r}
+if (!exists("db")){db <- tools::CRAN_package_db()}
+mdf <- data.frame(Package = db[, "Package"], 
+                  Title = db[, "Title"], 
+                  Description = db[, "Description"])
+net.pks <- mdf[grep("network", mdf[, "Description"], ignore.case = TRUE), ]
+coo.pks <- net.pks[grepl("co-occur", net.pks[, "Description"], ignore.case = TRUE), ]
+as.character(coo.pks[, "Package"])
+```
+
+EcoSimR: what methods for network modeling? What Bayesian methods?
+
+Araujo method
+
 # Methods
 
 ## Overview
@@ -104,10 +120,10 @@ zero (i.e. a species does not influence it's own probability of being
 observed).
 
 
-\begin{figure}[ht]
-\centering
-\includegraphics[width=\linewidth]{img/lcn_araujo_method.pdf}
-\caption{Lichen interaction networks were constructed by conducting
+
+
+
+![Lichen interaction networks were constructed by conducting
   field observations in 1 cm$^2$ cells within a 10 cm$^2$ grid on each
   tree using a checkerboard pattern (grey cells). Thus, a set of $N$
   total cell observations were recorded for each tree with the
@@ -120,9 +136,26 @@ observed).
   their observed co-occurrence frequency, $S_iS_j$, to that expected
   due to chance alone, $E[P(S_iS_j)] = P(S_i) P(S_j)$, and
   $P(S_i|S_j)$ reduces to $P(S_i)$, the observed individual
-  probability of species $S_i$.}
-\label{fig:conet_method}
-\end{figure}
+  probability of species $S_i$.](img/lcn_araujo_method.pdf)\begin{figure}[ht]
+
+<!-- \centering -->
+<!-- \includegraphics[width=\linewidth]{img/lcn_araujo_method.pdf} -->
+<!-- \caption{Lichen interaction networks were constructed by conducting -->
+<!--   field observations in 1 cm$^2$ cells within a 10 cm$^2$ grid on each -->
+<!--   tree using a checkerboard pattern (grey cells). Thus, a set of $N$ -->
+<!--   total cell observations were recorded for each tree with the -->
+<!--   presence or absence of each species recorded for each cell. Applying -->
+<!--   the probability-based network modeling method adapted from -->
+<!--   [@Araujo2011], we calculated the conditional probabilities, -->
+<!--   $P(S_i|S_j)$, for all species pairs and removed (i.e. set equal to -->
+<!--   zero) species pairs whose joint probabilities, $P(S_i S_j)$, were -->
+<!--   not significant using a confidence interval based comparison of -->
+<!--   their observed co-occurrence frequency, $S_iS_j$, to that expected -->
+<!--   due to chance alone, $E[P(S_iS_j)] = P(S_i) P(S_j)$, and -->
+<!--   $P(S_i|S_j)$ reduces to $P(S_i)$, the observed individual -->
+<!--   probability of species $S_i$.} -->
+<!-- \label{fig:conet_method} -->
+<!-- \end{figure} -->
 
 
 
@@ -142,14 +175,14 @@ dat <- dat[, -1:-2]
 dat[is.na(dat)] <- 0
 dat[dat != 0] <- 1
 ## 
-pb.cn <- coNet(dat, ci.p = 99)
+pb.cn <- coNet::coNet(dat, ci.p = 99)
 pb.cn <- pb.cn[apply(abs(pb.cn), 1, sum) > 0, apply(abs(pb.cn), 2, sum) > 0]
 spp <- rownames(pb.cn)
 rownames(pb.cn) <- colnames(pb.cn) <- 1:nrow(pb.cn)
 pb.ig <- igraph::graph_from_adjacency_matrix(abs(pb.cn), mode = "directed", weighted = TRUE)
-pb.btw <- betweenness(pb.ig, normalized = TRUE)
+pb.btw <- igraph::betweenness(pb.ig, normalized = TRUE)
 names(pb.btw) <- spp
-plot(pb.ig, vertex.size = (pb.btw*100)^(0.85), 
+igraph::plot.igraph(pb.ig, vertex.size = (pb.btw*100)^(0.85), 
             vertex.label.color = "black", 
             vertex.boarder.color = "white",
             arrow.size = 0.1)
