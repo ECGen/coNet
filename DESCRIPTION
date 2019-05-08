@@ -2,7 +2,6 @@ Package: coNet
 Type: Package
 Title: Create and analyze network models based on co-occurrence data
 Version: 0.1
-Date: 2019-02-15
 Author: Matthew K. Lau
 Maintainer: Matthew K. Lau <matthewklau@fas.harvard.edu>
 Description: A toolbox for modeling and analyzing ecological networks.
