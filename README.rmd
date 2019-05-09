@@ -1,0 +1,35 @@
+# coNet: Tools for modeling and analyzing ecological networks using co-occurrence data.
+
+# Overview
+
+* Network models are one way to represent systems [@Borrett2014].
+* It's not always possible to directly observe relationships
+  (i.e. ecological interactions) [@Cite].
+* In ecology, space can be used as a substitute for time [@Gotelli],
+  making the assumption that variance of conditions and processes have
+  little influence on spatial patterns [@Cite].
+* This method implements an adaptation of the method developed by
+  Araujo et al. 2011 expanded with the application of Bayesian
+  probability to generate network models.
+* The package also provides functions for comparative analysis of a
+  set of networks.
+
+# Install
+
+Currently, the package is still in beta but it can be installed via
+the *devtools* package.
+
+```{r eval = FALSE}
+install.packages("devtools")
+devtools::install_github("ECGen/coNet")
+```
+
+# Example
+
+
+
+
+# References
+
+
+
