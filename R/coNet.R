@@ -1,20 +1,38 @@
 #' Co-occurrence based interaction network modeling.
 #' 
 #' Generates an interaction network model based on a matrix of
-#' co-occurrences. This function is based on the method described in
-#' \insertCite{Araujo2011}{Rdpack}.
+#' co-occurrences (i.e. repeated observations in space). This function
+#' is based on the method described in
+#' \insertCite{Araujo2011}{conetto} updated to use conditional
+#' probabilities. 
 #' 
 #' %% ~~ If necessary, more details than the description above ~~
 #' 
 #' @param x A co-occurrence matrix with observations in rows and
-#' species in columns.
-#' @param ci.p Confidence interval probability used for edge removal
-#' in percent (e.g. use 95 for a nintey-five percent confidence
-#' interval)
-#' @param conditional LOGICAL: should conditional probabilities be used?
-#' @param signs LOGICAL: should the sign (positive or negative)
-#' of the interactions be returned?
+#'     species in columns.
+#' @param ci.p Interval used for edge removal in percent (e.g. use 95
+#'     for a nintey-five percent confidence interval).
+#' @param raw LOGICAL: should the original matrix of conditional
+#'     probabilities, prior to removel of conditional probabilities
+#'     that are within the removal interval.
 #' @return An interaction network model in matrix form.
+#' @details Given a set of repeated observations of a set of variables
+#'     (e.g. biological species), a network of model of
+#'     interactions/interdependencies estimated using the conditional
+#'     probabilties (\eqn{P(S_i|S_j))}). This is calculated using
+#'     Bayes' Theorem, as \eqn{P(S_i|S_j)) =
+#'     \frac{P(S_i,S_j)}{P(S_j)}. \eqn{P(S_i,S_j)} is the marginal
+#'     probability, the probability of observing species (\eqn{S_i}
+#'     and \eqn{S_j}), which is calculated from the individual
+#'     probabilities of each species (\eqn{P(S)}). The total abundance
+#'     of each species is used to quantify the individual
+#'     probabilities of each species, such the \eqn{P(S_i) =
+#'     \frac{S_i}{N}}, where \eqn{N} is the total number of
+#'     observational units. The marginal probabilities similarly
+#'     calculated as total number of co-occurrences divided by the
+#'     total number of observational units, \eqn{P(S_i,S_j) =
+#'     \frac{(S_i,S_j)}{N}}.
+#' 
 #' @note %% ~~further notes~~
 #' @author Matthew K. Lau
 #' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
@@ -30,8 +48,7 @@
 #' ##--	or do  help(data=index)  for the standard data sets.
 #' @importFrom Rdpack reprompt
 #' @export coNet
-coNet <- function(x = "co-occurrence matrix",  ci.p = 95, 
-                   conditional = TRUE, signs = TRUE){
+coNet <- function(x = "co-occurrence matrix",  ci.p = 95, raw = FALSE){
     Z <- qnorm((1 - ci.p/100)/2, lower.tail = FALSE)
     if (class(x) == "data.frame"){x <- as.matrix(x)}
     x <- sign(x)
@@ -47,16 +64,12 @@ coNet <- function(x = "co-occurrence matrix",  ci.p = 95,
     ab <- t(x) %*% x    
     net <- ab
     net[ab <= ci.u & ab >= ci.l] <- 0
-    if (signs){
-        net[ab > ci.u] <- net[ab > ci.u] * 1
-        net[ab < ci.l] <- net[ab < ci.l] * -1
-    }
-    if (conditional){
-        net.null <- matrix(rep(P[, 1], ncol(net)), nrow = nrow(P))
-        net.cond <- cond_net(x) * abs(sign(net))
-        net.cond[abs(sign(net)) == 0] <- net.null[abs(sign(net)) == 0]
-        net <- net.cond - net.null
-        diag(net) <- 0
-    }
+    net[ab > ci.u] <- net[ab > ci.u] * 1
+    net[ab < ci.l] <- net[ab < ci.l] * -1
+    net.null <- matrix(rep(P[, 1], ncol(net)), nrow = nrow(P))
+    net.cond <- cond_net(x) * abs(sign(net))
+    net.cond[abs(sign(net)) == 0] <- net.null[abs(sign(net)) == 0]
+    if (!(raw)){net <- net.cond - net.null}else{net <- net.cond}
+    diag(net) <- 0
     return(net)
 }

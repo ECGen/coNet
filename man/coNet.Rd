@@ -4,32 +4,28 @@
 \alias{coNet}
 \title{Co-occurrence based interaction network modeling.}
 \usage{
-coNet(x = "co-occurrence matrix", ci.p = 95, conditional = TRUE,
-  signs = TRUE)
+coNet(x = "co-occurrence matrix", ci.p = 95, raw = FALSE)
 }
 \arguments{
 \item{x}{A co-occurrence matrix with observations in rows and
 species in columns.}
 
-\item{ci.p}{Confidence interval probability used for edge removal
-in percent (e.g. use 95 for a nintey-five percent confidence
-interval)}
+\item{ci.p}{Interval used for edge removal in percent (e.g. use 95
+for a nintey-five percent confidence interval).}
 
-\item{conditional}{LOGICAL: should conditional probabilities be used?}
-
-\item{signs}{LOGICAL: should the sign (positive or negative)
-of the interactions be returned?}
+\item{raw}{LOGICAL: should the original matrix of conditional
+probabilities, prior to removel of conditional probabilities
+that are within the removal interval.}
 }
 \value{
 An interaction network model in matrix form.
 }
 \description{
 Generates an interaction network model based on a matrix of
-co-occurrences. This function is based on the method described in
-\insertCite{Araujo2011}{Rdpack}.
-}
-\details{
-%% ~~ If necessary, more details than the description above ~~
+co-occurrences (i.e. repeated observations in space). This function
+is based on the method described in
+\insertCite{Araujo2011}{conetto} updated to use conditional
+probabilities.
 }
 \note{
 %% ~~further notes~~
