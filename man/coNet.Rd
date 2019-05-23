@@ -5,7 +5,7 @@
 \title{Co-occurrence based interaction network modeling.}
 \usage{
 coNet(x = "co-occurrence matrix", ci.p = 95, conditional = TRUE,
-  scale = FALSE, signs = FALSE)
+  signs = TRUE)
 }
 \arguments{
 \item{x}{A co-occurrence matrix with observations in rows and
@@ -17,9 +17,6 @@ interval)}
 
 \item{conditional}{LOGICAL: should conditional probabilities be used?}
 
-\item{scale}{LOGICAL: should values be rescaled such that the
-number of co-occurrences is divided by the total number of species?}
-
 \item{signs}{LOGICAL: should the sign (positive or negative)
 of the interactions be returned?}
 }
@@ -27,7 +24,9 @@ of the interactions be returned?}
 An interaction network model in matrix form.
 }
 \description{
-Generates an interaction network model based on a matrix of co-occurrences.
+Generates an interaction network model based on a matrix of
+co-occurrences. This function is based on the method described in
+\insertCite{Araujo2011}{Rdpack}.
 }
 \details{
 %% ~~ If necessary, more details than the description above ~~
@@ -36,6 +35,8 @@ Generates an interaction network model based on a matrix of co-occurrences.
 %% ~~further notes~~
 }
 \examples{
+
+
 
 ##---- Should be DIRECTLY executable !! ----
 ##-- ==>  Define data, use random,

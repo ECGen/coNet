@@ -1,7 +1,8 @@
 #' Co-occurrence based interaction network modeling.
 #' 
 #' Generates an interaction network model based on a matrix of
-#' co-occurrences. 
+#' co-occurrences. This function is based on the method described in
+#' \insertCite{Araujo2011}{Rdpack}.
 #' 
 #' %% ~~ If necessary, more details than the description above ~~
 #' 
@@ -26,6 +27,7 @@
 #' ##---- Should be DIRECTLY executable !! ----
 #' ##-- ==>  Define data, use random,
 #' ##--	or do  help(data=index)  for the standard data sets.
+#' @importFrom Rdpack reprompt
 #' @export coNet
 coNet <- function(x = "co-occurrence matrix",  ci.p = 95, 
                    conditional = TRUE, signs = TRUE){
