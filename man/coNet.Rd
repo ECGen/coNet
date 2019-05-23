@@ -43,7 +43,7 @@ co-occurrences. This function is based on the method described in
 ##--	or do  help(data=index)  for the standard data sets.
 }
 \references{
-%% ~put references to the literature/web site here ~
+\insertAllCited{}
 }
 \seealso{
 %% ~~objects to See Also as \code{\link{help}}, ~~~

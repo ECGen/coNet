@@ -18,7 +18,8 @@
 #' @note %% ~~further notes~~
 #' @author Matthew K. Lau
 #' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-#' @references %% ~put references to the literature/web site here ~
+#' @references
+#' \insertAllCited{}
 #' @keywords ~kwd1 ~kwd2
 #' @examples
 #'
