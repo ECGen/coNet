@@ -4,7 +4,7 @@ Title: Model and analyze co-occurrence based networks.
 Version: 0.1
 Author: Matthew K. Lau
 Maintainer: Matthew K. Lau <matthewklau@fas.harvard.edu>
-Description: A toolbox for modeling and analyzing ecological networks.
+Description: A toolbox for modeling and analyzing networks using co-occurrence data.
 URL: https://github.com/ECGen/coNet.git
 Imports: Rdpack
 RdMacros: Rdpack

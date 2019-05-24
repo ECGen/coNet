@@ -15,7 +15,6 @@
 #' @param raw LOGICAL: should the original matrix of conditional
 #'     probabilities, prior to removel of conditional probabilities
 #'     that are within the removal interval.
-#' @return An interaction network model in matrix form.
 #' @details Given a set of repeated observations of a set of variables
 #'     (e.g. biological species), a network of model of
 #'     interactions/interdependencies estimated using the conditional
@@ -32,7 +31,7 @@
 #'     calculated as total number of co-occurrences divided by the
 #'     total number of observational units, \eqn{P(S_i,S_j) =
 #'     \frac{(S_i,S_j)}{N}}.
-#' 
+#' @return An interaction network model in matrix form.
 #' @note %% ~~further notes~~
 #' @author Matthew K. Lau
 #' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
@@ -47,8 +46,8 @@
 #' ##-- ==>  Define data, use random,
 #' ##--	or do  help(data=index)  for the standard data sets.
 #' @importFrom Rdpack reprompt
-#' @export coNet
-coNet <- function(x = "co-occurrence matrix",  ci.p = 95, raw = FALSE){
+#' @export conet
+conet <- function(x = "co-occurrence matrix",  ci.p = 95, raw = FALSE){
     Z <- qnorm((1 - ci.p/100)/2, lower.tail = FALSE)
     if (class(x) == "data.frame"){x <- as.matrix(x)}
     x <- sign(x)
