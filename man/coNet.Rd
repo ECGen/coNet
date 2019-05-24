@@ -33,8 +33,7 @@ Generates an interaction network model based on a matrix of
 co-occurrences (i.e. repeated observations in space). This function
 is based on the method described in
 \insertCite{Araujo2011}{conetto} updated to use conditional
-probabilities.  %% ~~ If necessary, more details than the
-description above ~~
+probabilities.
 }
 \note{
 Given a set of repeated observations of variables
@@ -48,7 +47,7 @@ Given a set of repeated observations of variables
     total abundance of each species is used to quantify the
     individual probabilities of each species, such the \eqn{P(S_i)
     = \frac{S_i}{N}}, where \eqn{N} is the total number of
-    observational units. The marginal probabilities similarly
+    observational units. The marginal probabilities are similarly
     calculated as the total number of co-occurrences divided by the
     total number of observational units, \eqn{P(S_i,S_j) =
     \frac{(S_i,S_j)}{N}}. For more details, such as the interval

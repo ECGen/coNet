@@ -2,14 +2,15 @@
 % Please edit documentation in R/minNet.R
 \name{minNet}
 \alias{minNet}
-\title{Minimize a network using any network generating function and an abundance threshold}
+\title{Minimize a network using any network generating function and an
+abundance threshold}
 \usage{
-minNet(x, FUN = "cdNet", alpha = 0.05)
+minNet(x, FUN = "coNet", alpha = 0.05)
 }
 \arguments{
 \item{x}{A network in matrix format.}
 
-\item{FUN}{Function to use for minimization.}
+\item{FUN}{Function to use for minimization. DEFAULT is coNet}
 
 \item{alpha}{Significance level.}
 }
@@ -20,16 +21,19 @@ The minimized network is returned in matrix format.
 Method for reducing the number of edges in a network.
 }
 \details{
-Using a chosen minimization algorithm, a minimzed network is computed.
+Using a chosen minimization algorithm based on the point at which
+the graph breaks into two components, a minimzed network is
+computed. This is based on the percolation threshold algorithm
+developed in \insertCite{Araujo2011}{conetto}
 }
 \note{
 %% ~~further notes~~
 }
 \examples{
 
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
+}
+\references{
+\insertAllCited{}
 }
 \seealso{
 %% ~~objects to See Also as \code{\link{help}}, ~~~

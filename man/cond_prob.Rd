@@ -7,25 +7,24 @@
 cond_prob(a, b)
 }
 \arguments{
-\item{a}{Occurrences of a species.}
+\item{a}{A set of repeated observations of occurrences.}
 
-\item{b}{Occurrences of another species.}
+\item{b}{Another set of repeated observations of occurrences.}
 }
 \value{
-Returns the conditional probabilities for each species
-based on the other species
+Returns the conditional probabilities.
 }
 \description{
-Calculates conditional probabilities using co-occurrences of two species.
+Calculates conditional probabilities using co-occurrences using
+Bayes' Theorem, such that \eqn{P(A|B) = \frac{P(A,B)}{P(B)}}, where
+\eqn{P(A,B) = \frac{(A,B)}{N}}, \eqn{P(B) = \frac{(B)}{N}} and
+\eqn{N} is the total number of observational units.
 }
 \note{
-%% ~~further notes~~
+This is primarily a low-level function used by coNet, it may
+    be of interest to more advanced users.
 }
 \examples{
-
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
 
 }
 \references{

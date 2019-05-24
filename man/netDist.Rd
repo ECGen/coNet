@@ -19,14 +19,15 @@ Returns a distance objects of pairwise distance or
 dissimilarities for all networks.
 }
 \description{
-Takes a list of networks and returns a distance matrix using Euclidean
-distance.
+Takes a list of networks and returns a distance matrix using
+Euclidean distance.
 }
 \details{
-This function computes the Euclidean (i.e. straight line) distance using all
-edges for all pairs of networks in a list of networks. The mathematics of
-using Euclidean distance to summarize the difference between two networks
-has not been explored fully, so use with caution.
+This function computes the Euclidean (i.e. straight line) distance
+using all edges for all pairs of networks in a list of
+networks. The mathematics of using Euclidean distance to summarize
+the difference between two networks has not been explored fully, so
+use with caution.
 }
 \note{
 %% ~~further notes~~

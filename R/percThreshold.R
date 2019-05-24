@@ -12,8 +12,11 @@
 #' @keywords ~kwd1 ~kwd2
 #' @examples
 #' 
+#' @importFrom igraph graph.adjacency
+#' @importFrom igraph no.clusters
+#' @importFrom igraph clusters
 #' @export percThreshold
-percThreshold <-function(x = 'network matrix',step.size = 0.01){
+percThreshold <-function(x = 'network matrix', step.size = 0.01){
   no.c <- no.clusters(graph.adjacency(x,weighted = TRUE))
   step <- 1
   while (no.c == 1){

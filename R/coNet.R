@@ -4,8 +4,7 @@
 #' co-occurrences (i.e. repeated observations in space). This function
 #' is based on the method described in
 #' \insertCite{Araujo2011}{conetto} updated to use conditional
-#' probabilities.  %% ~~ If necessary, more details than the
-#' description above ~~
+#' probabilities.  
 #' @param x A co-occurrence matrix with observations in rows and
 #'     species in columns.
 #' @param ci.p Interval used for edge removal in percent (e.g. use 95

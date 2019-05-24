@@ -11,20 +11,19 @@ cond_net(x)
 and observations in rows.}
 }
 \value{
-Returns a matrix of conditional probabilities for a set of species.
+Returns a matrix of conditional probabilities for a set of
+    species.
 }
 \description{
 Generates a matrix of conditional probabilities for a set of
-species co-occurrences.
+co-occurrences.
 }
 \note{
-%% ~~further notes~~
+This is primarily a low-level function used by coNet, it may
+    be of interest to more advanced users.
 }
 \examples{
 
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
 }
 \references{
 %% ~put references to the literature/web site here ~
