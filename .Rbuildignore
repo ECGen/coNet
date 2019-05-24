@@ -2,3 +2,4 @@ CONTRIBUTE.md
 cran-comments.md
 .travis.yml
 ^paper
+^LICENSE\.md$
