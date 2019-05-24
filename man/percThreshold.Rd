@@ -22,7 +22,7 @@ method from \insertCite{Araujo2011}{conetto}.
 
 }
 \references{
-%% ~put references to the literature/web site here ~
+\insertAllCited{}
 }
 \seealso{
 %% ~~objects to See Also as \code{\link{help}}, ~~~

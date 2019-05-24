@@ -35,19 +35,13 @@
 #' @note %% ~~further notes~~
 #' @author Matthew K. Lau
 #' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-#' @references
-#' \insertAllCited{}
+#' @references \insertAllCited{}
 #' @keywords ~kwd1 ~kwd2
 #' @examples
-#'
 #' 
-#' 
-#' ##---- Should be DIRECTLY executable !! ----
-#' ##-- ==>  Define data, use random,
-#' ##--	or do  help(data=index)  for the standard data sets.
 #' @importFrom Rdpack reprompt
-#' @export conet
-conet <- function(x = "co-occurrence matrix",  ci.p = 95, raw = FALSE){
+#' @export coNet
+coNet <- function(x = "co-occurrence matrix",  ci.p = 95, raw = FALSE){
     Z <- qnorm((1 - ci.p/100)/2, lower.tail = FALSE)
     if (class(x) == "data.frame"){x <- as.matrix(x)}
     x <- sign(x)
