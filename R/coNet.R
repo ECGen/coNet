@@ -42,7 +42,8 @@
 #' @references \insertAllCited{}
 #' @keywords ~kwd1 ~kwd2
 #' @examples
-#' 
+#'
+#' @importFrom stats qnorm
 #' @importFrom Rdpack reprompt
 #' @export coNet
 coNet <- function(x = "co-occurrence matrix",  ci.p = 95, raw = FALSE){

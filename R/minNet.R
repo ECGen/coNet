@@ -23,13 +23,13 @@
 #' @importFrom igraph no.clusters
 #' @export minNet
 minNet <- function(x, FUN = 'coNet', alpha = 0.05){
-    thresh <- start
+    thresh <- 1
     g <- get(FUN)(m, alpha = alpha)
     no.c <- no.clusters(graph.adjacency(g, weighted = TRUE))
     while (no.c == 1){
         thresh <- thresh + 1
         m[m < thresh] <- 0
-        g <- get(FUN)(m,alpha=alpha)
+        g <- get(FUN)(m,alpha = alpha)
         w <- c(w, components(graph.adjacency(g, weighted = TRUE),
                              mode='weak'))
         s <- c(s,components(graph.adjacency(g, weighted = TRUE),
@@ -38,5 +38,5 @@ minNet <- function(x, FUN = 'coNet', alpha = 0.05){
     }
     m <- x
     m[m < (thresh - 1)] <- 0
-    get(FUN)(m, alpha=alpha)
+    get(FUN)(m, alpha = alpha)
 }

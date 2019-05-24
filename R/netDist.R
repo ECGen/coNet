@@ -21,10 +21,7 @@
 #' @keywords ~kwd1 ~kwd2
 #' @examples
 #' 
-#' ##---- Should be DIRECTLY executable !! ----
-#' ##-- ==>  Define data, use random,
-#' ##--	or do  help(data=index)  for the standard data sets.
-#' 
+#' @importFrom ecodist bcdist
 #' @export netDist
 netDist <-  function(x, zero.na = TRUE, method = "euclidean"){
     out <- array(0, dim = rep(length(x), 2))
@@ -40,7 +37,7 @@ netDist <-  function(x, zero.na = TRUE, method = "euclidean"){
                     c(x[[j]][lower.tri(x[[j]])], 
                       x[[i]][upper.tri(x[[i]])]))
                 if (all(y == 0)){y[y == 0] <- 1}
-                out[i, j] <- ecodist::bcdist(t(y))
+                out[i, j] <- bcdist(t(y))
             }
         }
     }else{
