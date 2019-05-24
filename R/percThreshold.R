@@ -12,8 +12,8 @@
 #' @keywords ~kwd1 ~kwd2
 #' @examples
 #' 
-#' @importFrom igraph graph.adjacency
 #' @importFrom igraph no.clusters
+#' @importFrom igraph graph.adjacency
 #' @importFrom igraph clusters
 #' @export percThreshold
 percThreshold <-function(x = 'network matrix', step.size = 0.01){

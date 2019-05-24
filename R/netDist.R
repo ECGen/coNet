@@ -22,6 +22,7 @@
 #' @examples
 #' 
 #' @importFrom ecodist bcdist
+#' @importFrom stats dist
 #' @export netDist
 netDist <-  function(x, zero.na = TRUE, method = "euclidean"){
     out <- array(0, dim = rep(length(x), 2))
