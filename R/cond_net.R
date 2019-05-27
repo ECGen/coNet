@@ -27,7 +27,7 @@
 cond_net <- function(x){
     out <- matrix(0, nrow = ncol(x), ncol = ncol(x))
     rownames(out) <- colnames(out) <- colnames(x)
-    nc <- 1:ncol(x)
+    nc <- seq(1, ncol(x))
     for (i in seq_along(nc)){
         for (j in i:ncol(x)){
             cp <- cond_prob(sign(x[, i]), sign(x[, j]))
