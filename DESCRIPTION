@@ -4,12 +4,12 @@ Title: Model and analyze co-occurrence based networks
 Version: 0.2
 Author: Matthew K. Lau
 Maintainer: Matthew K. Lau <matthewklau@fas.harvard.edu>
-Description: A toolbox for modeling and analyzing networks using co-occurrence data
+Description: The conetto package provides methods for constructing network models from co-occurrence data using Bayesian conditional probability.
 URL: https://github.com/ECGen/conetto
 Imports: Rdpack, ecodist
 RdMacros: Rdpack
 Encoding: UTF-8
-License: CCBY-4.0
+License: CC0
 RoxygenNote: 6.1.1
 Suggests: 
     testthat (>= 2.1.0)
