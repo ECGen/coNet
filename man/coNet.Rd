@@ -19,13 +19,13 @@ that are within the removal interval.}
 }
 \value{
 An interaction network model in matrix form with
-    "non-significant" links removed and relativized to the marginal
+    "non-significant" links removed and relativized to the joint
     probabilities (DEFAULT) or not (raw = TRUE). If relativized,
     the matrix is the deviations of the conditional probabilities
-    from the marginal probabilities. For conditional probabilities
-    equal to the marginal probabilities, this value is 0. This
+    from the joint probabilities. For conditional probabilities
+    equal to the joint probabilities, this value is 0. This
     value can also range from 1 to -1, depending on the magnitude
-    of the difference between the conditional and marginal
+    of the difference between the conditional and joint
     probabilities.
 }
 \description{
@@ -41,13 +41,13 @@ Given a set of repeated observations of variables
     interdependencies is estimated using conditional probabilties
     (\eqn{P(S_i|S_j)}). This is calculated using Bayes' Theorem, as
     \eqn{P(S_i|S_j) = \frac{P(S_i,S_j)}{P(S_j)}}. \eqn{P(S_i,S_j)}
-    is the marginal probability, the probability of observing
+    is the joint probability, the probability of observing
     species (\eqn{S_i} and \eqn{S_j}), which is calculated from the
     individual probabilities of each species (\eqn{P(S)}). The
     total abundance of each species is used to quantify the
     individual probabilities of each species, such the \eqn{P(S_i)
     = \frac{S_i}{N}}, where \eqn{N} is the total number of
-    observational units. The marginal probabilities are similarly
+    observational units. The joint probabilities are similarly
     calculated as the total number of co-occurrences divided by the
     total number of observational units, \eqn{P(S_i,S_j) =
     \frac{(S_i,S_j)}{N}}. For more details, such as the interval
