@@ -12,10 +12,8 @@
 #'     directly compute the conditional probabilities from a set of
 #'     co-occurrences.
 #' @author Matthew K. Lau
-#' @seealso \code{\link{coNet}} \code{\link{cond_prob}} %% ~~objects
+#' @seealso \code{\link{coNet}}, \code{\link{cond_prob}} %% ~~objects
 #'     to See Also as \code{\link{help}}, ~~~
-#' @references %% ~put references to the literature/web site here ~
-#' @keywords %% ~kwd1 ~kwd2
 #' @examples
 #'
 #' A <- c(1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1)

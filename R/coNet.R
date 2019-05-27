@@ -38,9 +38,8 @@
 #'     \frac{(S_i,S_j)}{N}}. For more details, such as the interval
 #'     based test, see \insertCite{Araujo2011}{conetto}.
 #' @author Matthew K. Lau
-#' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
+#' @seealso \code{\link{cond_prob}} \code{\link{cond_net}} 
 #' @references \insertAllCited{}
-#' @keywords ~kwd1 ~kwd2
 #' @examples
 #'
 #' A <- c(1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1)

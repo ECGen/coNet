@@ -11,9 +11,6 @@
 #' @note This is primarily a low-level function used by coNet, it may
 #'     be of interest to more advanced users.
 #' @author Matthew K. Lau
-#' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-#' @references %% ~put references to the literature/web site here ~
-#' @keywords ~kwd1 ~kwd2
 #' @examples
 #'
 #' A <- c(1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1)

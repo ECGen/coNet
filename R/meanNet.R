@@ -6,10 +6,8 @@
 #' @param x A list of networks to be used for calculating distances.
 #' @param zero.na LOGICAL: Should NA values be treated as zeros?
 #' @return Returns a matrix of means.
-#' @note %% ~~further notes~~
 #' @author Matthew K. Lau
 #' @seealso \code{\link{coNet}} %% ~~objects to See Also as \code{\link{help}}, ~~~
-#' @keywords %% ~kwd1 ~kwd2
 #' @examples
 #' 
 #' net.l <- lapply(1:10, function(x) matrix(runif(100), nrow = 10))
