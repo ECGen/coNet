@@ -20,19 +20,30 @@ co-occurrences.
 }
 \note{
 This is primarily a low-level function used by coNet, it may
-    be of interest to more advanced users.
+    be of interest to more advanced users who would like to
+    directly compute the conditional probabilities from a set of
+    co-occurrences.
 }
 \examples{
+
+A <- c(1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1)
+B <- c(1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1)
+C <- c(1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1)
+D <- c(0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0)
+M <- data.frame(A, B, C, D)
+cond_net(M)
 
 }
 \references{
 %% ~put references to the literature/web site here ~
 }
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{coNet}} \code{\link{cond_prob}} %% ~~objects
+    to See Also as \code{\link{help}}, ~~~
 }
 \author{
 Matthew K. Lau
 }
+\keyword{%%}
 \keyword{~kwd1}
 \keyword{~kwd2}

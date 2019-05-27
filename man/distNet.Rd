@@ -34,12 +34,16 @@ use with caution.
 }
 \examples{
 
+net.l <- lapply(1:10, function(x) matrix(runif(100), nrow = 10))
+distNet(net.l)
+
 }
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{coNet}} %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \author{
 Matthew K. Lau
 }
+\keyword{%%}
 \keyword{~kwd1}
 \keyword{~kwd2}
