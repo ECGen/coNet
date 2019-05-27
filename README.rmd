@@ -27,7 +27,38 @@ devtools::install_github("ECGen/coNet")
 
 # Example
 
+## Generate co-occurrence data
 
+The basic usage of the *connetto* package is to generate network
+models. To do this, we need a matrix of co-occurrence values, which
+will be passed into the `coNet` function:
+
+```{r}
+A <- c(1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1)
+B <- c(1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1)
+C <- c(1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1)
+D <- c(0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0)
+M <- data.frame(A, B, C, D)
+coNet(M)
+```
+
+The `coNet` function returns of square matrix with the same number of
+rows and columns equal to the number of columns in the co-occurrence
+matrix. There are a couple of features that are useful to note here:
+
+* Notice that the matrix is not symetric, that is, the top and bottom
+  halves are not equal. This is because the dependency of two
+  variables is based on both their independent occurrences and their
+  co-occurrences.
+* Also, you will notice that some of the values in the network are
+  zero and while some are positive there are also negative
+  values. This is because `coNet` conducts a test that compares the
+  observed co-occurrences to a theoretical "null" co-occurrence value
+  that is analytically determined. If the observed co-occurrences are
+  lower, inside or greater than the "null" predicted interval, then
+  the resulting conditional . The null interval test can be adjusted
+  using the *ci.p* argument (DEFAULT = 95).
+* 
 
 
 # References
