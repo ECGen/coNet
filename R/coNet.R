@@ -69,7 +69,7 @@ coNet <- function(x = "co-occurrence matrix",  ci.p = 95, raw = FALSE){
     net[ab < ci.l] <- net[ab < ci.l] * -1
     net.null <- matrix(rep(P[, 1], ncol(net)), nrow = nrow(P))
     net.cond <- cond_net(x) * abs(sign(net))
-    net.cond[abs(sign(net)) == 0] <- net.null[abs(sign(net)) == 0]
+    net.cond  [abs(sign(net)) == 0] <- net.null[abs(sign(net)) == 0]
     ## Relative to joint probabilities
     if (raw){net <- net.cond}else{net <- net.cond - net.null}
     return(net)

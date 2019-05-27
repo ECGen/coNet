@@ -27,7 +27,6 @@ devtools::install_github("ECGen/coNet")
 
 # Example
 
-## Generate co-occurrence data
 
 The basic usage of the *connetto* package is to generate network
 models. To do this, we need a matrix of co-occurrence values, which
@@ -46,20 +45,31 @@ The `coNet` function returns of square matrix with the same number of
 rows and columns equal to the number of columns in the co-occurrence
 matrix. There are a couple of features that are useful to note here:
 
-* Notice that the matrix is not symetric, that is, the top and bottom
+* First, the matrix is not symetric, that is, the top and bottom
   halves are not equal. This is because the dependency of two
   variables is based on both their independent occurrences and their
   co-occurrences.
-* Also, you will notice that some of the values in the network are
-  zero and while some are positive there are also negative
-  values. This is because `coNet` conducts a test that compares the
-  observed co-occurrences to a theoretical "null" co-occurrence value
-  that is analytically determined. If the observed co-occurrences are
-  lower, inside or greater than the "null" predicted interval, then
-  the resulting conditional . The null interval test can be adjusted
-  using the *ci.p* argument (DEFAULT = 95).
-* 
+* Also, some of the values in the network are zero. This is because
+  `coNet` conducts a test that compares the observed co-occurrences to
+  a theoretical "null" co-occurrence interval. If the observed
+  co-occurrences are within the interval, the conditional probability
+  is set equal to the joint probability. The threshold for the null
+  interval test can be adjusted using the *ci.p* argument (DEFAULT =
+  95).
+* Last, some values are negative. This is because the network is
+  comprised of the difference between the threshold adjusted
+  conditional probabilities minus the observed joint probabilities
+  (i.e. *P(A|B) - P(A,B)*). Therefore, if the conditional probability
+  is less than the observed joint probability, the resulting
+  "relative" value will be negative, while the oposite results in a
+  positive value for the network. The "raw", un-relativized, values
+  can be returned via the *raw* argument.
 
+## Network comparisons
+
+```{r}
+
+```
 
 # References
 
