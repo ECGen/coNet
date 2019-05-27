@@ -64,15 +64,6 @@ matrix. There are a couple of features that are useful to note here:
   positive value for the network. The "raw", un-relativized, values
   can be returned via the *raw* argument.
 
-If desired, networks can be reduced to the minimal size at which the
-network is broken into separate components. This can be done using the
-`percThreshold` functions, which was alos developed in
-[@Araujo2011]. This will return the thre
-
-```{r}
-net <- coNet(M)
-percThreshold(net)
-```
 
 ## Network comparisons
 
@@ -81,20 +72,29 @@ datasets, where multiple networks have been observed. Two other
 functions were written to provide a way to analyze these network
 sets. 
 
-One function, `netMean` "mean" or average of a set of networks can be calcul
+One function, `meanNet`, will calculate the "mean" or average of a set
+of networks. The resul is the cell-wise summation of all matrices
+divided by the total number of matrices. This function requires that
+the set of networks all have the same dinensionaity and that they are
+organized into a list.
 
 ```{r}
-coNet.R  meanNet.R  netDist.R  percThreshold.R
+net.l <- lapply(1:10, function(x) matrix(runif(100), nrow = 10))
+meanNet(net.l)
 ```
 
-Another function, `netDist`, facilitates the calculation of a distance
+Another function, `distNet`, facilitates the calculation of a distance
 matrix for a set of networks. Two metrics are provided, Euclidean and
-Bray-Curtis. 
+Bray-Curtis. The resulting matrix is the distance among all networks
+in the set. Similar to `meanNet`, `distNet` requires that all matrices
+have the same dimensionality. The result is a distance, or
+dissimilarity in the case of Bray-Curtis, matrix that can now be used
+for multivariate analyses, such as ordination.
 
 ```{r}
-
+net.d <- distNet(net.l)
+net.d
 ```
-
 
 # References
 
