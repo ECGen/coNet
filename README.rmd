@@ -1,18 +1,19 @@
-# coNet: Tools for modeling and analyzing ecological networks using co-occurrence data.
+---
+title: "coNet: model and analyze networks using co-occurrence data"
+output: "md_document"
+bibliography: "inst/REFERENCES.bib"
+---
 
-# Overview
-
-* Network models are one way to represent systems [@Borrett2014].
-* It's not always possible to directly observe relationships
-  (i.e. ecological interactions) [@Cite].
-* In ecology, space can be used as a substitute for time [@Gotelli],
-  making the assumption that variance of conditions and processes have
-  little influence on spatial patterns [@Cite].
-* This method implements an adaptation of the method developed by
+* Network models are a useful representation of systems [@Woodward2010].
+* Because it is not always possible to directly observe relationships
+  (i.e. ecological interactions) spatial or temporal patterns of
+  co-occurrence can be used to render models of interaction networks
+  [@Araujo2011].
+* The *conetto* implements an adaptation of the method developed by
   Araujo et al. 2011 expanded with the application of Bayesian
-  probability to generate network models.
-* The package also provides functions for comparative analysis of a
-  set of networks.
+  probability to generate network models and provides several
+  functions useful for comparative analysis of sets of co-occurrence
+  based networks. 
 
 # Install
 
