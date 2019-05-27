@@ -1,13 +1,14 @@
 Package: conetto
 Type: Package
 Title: Model and analyze co-occurrence based networks
-Version: 0.1
+Version: 0.2
 Author: Matthew K. Lau
 Maintainer: Matthew K. Lau <matthewklau@fas.harvard.edu>
 Description: A toolbox for modeling and analyzing networks using co-occurrence data
-URL: https://github.com/ECGen/coNet.git
+URL: https://github.com/ECGen/conetto
 Imports: Rdpack, igraph, ecodist
 RdMacros: Rdpack
 Encoding: UTF-8
-RoxygenNote: 6.1.1
 License: CCBY-4.0
+RoxygenNote: 6.1.1
+
