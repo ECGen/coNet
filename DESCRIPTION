@@ -6,7 +6,7 @@ Author: Matthew K. Lau
 Maintainer: Matthew K. Lau <matthewklau@fas.harvard.edu>
 Description: A toolbox for modeling and analyzing networks using co-occurrence data
 URL: https://github.com/ECGen/conetto
-Imports: Rdpack, igraph, ecodist
+Imports: Rdpack, ecodist
 RdMacros: Rdpack
 Encoding: UTF-8
 License: CCBY-4.0
