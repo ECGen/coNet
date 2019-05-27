@@ -4,6 +4,7 @@
 #' Bayes' Theorem, such that \eqn{P(A|B) = \frac{P(A,B)}{P(B)}}, where
 #' \eqn{P(A,B) = \frac{(A,B)}{N}}, \eqn{P(B) = \frac{(B)}{N}} and
 #' \eqn{N} is the total number of observational units.
+#'
 #' @param a A set of repeated observations of occurrences.
 #' @param b Another set of repeated observations of occurrences.
 #' @return Returns the conditional probabilities.
@@ -14,6 +15,15 @@
 #' @references %% ~put references to the literature/web site here ~
 #' @keywords ~kwd1 ~kwd2
 #' @examples
+#'
+#' A <- c(1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1)
+#' B <- c(1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1)
+#' cond_prob(A, B)
+#'
+#' C <- c(1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1)
+#' D <- c(0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0)
+#'
+#' cond_prob(C, D)
 #' 
 #' @export cond_prob
 cond_prob <- function(a, b){

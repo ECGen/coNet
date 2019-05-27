@@ -8,10 +8,12 @@
 #' @return Returns a matrix of means.
 #' @note %% ~~further notes~~
 #' @author Matthew K. Lau
-#' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-#' @keywords ~kwd1 ~kwd2
+#' @seealso \code{\link{coNet}} %% ~~objects to See Also as \code{\link{help}}, ~~~
+#' @keywords %% ~kwd1 ~kwd2
 #' @examples
 #' 
+#' net.l <- lapply(1:10, function(x) matrix(runif(100), nrow = 10))
+#' meanNet(net.l)
 #' 
 #' @export meanNet
 meanNet <-function(x, zero.na = TRUE){
