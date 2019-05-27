@@ -18,9 +18,6 @@ Returns a matrix of means.
 Given a set of networks in matrix format, this function will
 calculate the cell-wise (Hadimard) mean.
 }
-\note{
-%% ~~further notes~~
-}
 \examples{
 
 net.l <- lapply(1:10, function(x) matrix(runif(100), nrow = 10))
@@ -33,6 +30,3 @@ meanNet(net.l)
 \author{
 Matthew K. Lau
 }
-\keyword{%%}
-\keyword{~kwd1}
-\keyword{~kwd2}

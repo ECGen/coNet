@@ -34,16 +34,10 @@ M <- data.frame(A, B, C, D)
 cond_net(M)
 
 }
-\references{
-%% ~put references to the literature/web site here ~
-}
 \seealso{
-\code{\link{coNet}} \code{\link{cond_prob}} %% ~~objects
+\code{\link{coNet}}, \code{\link{cond_prob}} %% ~~objects
     to See Also as \code{\link{help}}, ~~~
 }
 \author{
 Matthew K. Lau
 }
-\keyword{%%}
-\keyword{~kwd1}
-\keyword{~kwd2}

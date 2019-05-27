@@ -29,9 +29,6 @@ networks. The mathematics of using Euclidean distance to summarize
 the difference between two networks has not been explored fully, so
 use with caution.
 }
-\note{
-%% ~~further notes~~
-}
 \examples{
 
 net.l <- lapply(1:10, function(x) matrix(runif(100), nrow = 10))
@@ -44,6 +41,3 @@ distNet(net.l)
 \author{
 Matthew K. Lau
 }
-\keyword{%%}
-\keyword{~kwd1}
-\keyword{~kwd2}

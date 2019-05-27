@@ -36,14 +36,6 @@ D <- c(0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0)
 cond_prob(C, D)
 
 }
-\references{
-%% ~put references to the literature/web site here ~
-}
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
-}
 \author{
 Matthew K. Lau
 }
-\keyword{~kwd1}
-\keyword{~kwd2}

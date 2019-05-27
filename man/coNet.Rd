@@ -67,10 +67,8 @@ coNet(M)
 \insertAllCited{}
 }
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{cond_prob}} \code{\link{cond_net}}
 }
 \author{
 Matthew K. Lau
 }
-\keyword{~kwd1}
-\keyword{~kwd2}
