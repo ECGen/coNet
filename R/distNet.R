@@ -23,8 +23,8 @@
 #' 
 #' @importFrom ecodist bcdist
 #' @importFrom stats dist
-#' @export netDist
-netDist <-  function(x, zero.na = TRUE, method = "euclidean"){
+#' @export distNet
+distNet <-  function(x, zero.na = TRUE, method = "euclidean"){
     out <- array(0, dim = rep(length(x), 2))
     if (!is.null(names(x))){
         rownames(out) <- colnames(out) <- names(x)

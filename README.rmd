@@ -10,10 +10,9 @@ bibliography: "inst/REFERENCES.bib"
   co-occurrence can be used to render models of interaction networks
   [@Araujo2011].
 * The *conetto* implements an adaptation of the method developed by
-  Araujo et al. 2011 expanded with the application of Bayesian
-  probability to generate network models and provides several
-  functions useful for comparative analysis of sets of co-occurrence
-  based networks. 
+  [@Araujo2011] expanded with the application of Bayesian probability
+  to generate network models and provides several functions useful for
+  comparative analysis of sets of co-occurrence based networks.
 
 # Install
 
@@ -65,11 +64,37 @@ matrix. There are a couple of features that are useful to note here:
   positive value for the network. The "raw", un-relativized, values
   can be returned via the *raw* argument.
 
+If desired, networks can be reduced to the minimal size at which the
+network is broken into separate components. This can be done using the
+`percThreshold` functions, which was alos developed in
+[@Araujo2011]. This will return the thre
+
+```{r}
+net <- coNet(M)
+percThreshold(net)
+```
+
 ## Network comparisons
+
+The `coNet` function was developed for the analysis of replicated
+datasets, where multiple networks have been observed. Two other
+functions were written to provide a way to analyze these network
+sets. 
+
+One function, `netMean` "mean" or average of a set of networks can be calcul
+
+```{r}
+coNet.R  meanNet.R  netDist.R  percThreshold.R
+```
+
+Another function, `netDist`, facilitates the calculation of a distance
+matrix for a set of networks. Two metrics are provided, Euclidean and
+Bray-Curtis. 
 
 ```{r}
 
 ```
+
 
 # References
 
