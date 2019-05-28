@@ -1,3 +1,30 @@
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+coNet
+=====
+
+<!-- # ijtiff  <img src="man/figures/logo.png" height="140" align="right"> -->
+<!-- Code status -->
+[![Build
+Status](https://travis-ci.org/ECGen/conetto.svg?branch=master)](https://travis-ci.org/ECGen/conetto)
+[![Build
+Status](https://travis-ci.org/ECGen/conetto.svg?branch=dev)](https://travis-ci.org/ECGen/conetto)
+
+<!-- R status -->
+<!-- [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/conetto)](https://cran.r-project.org/package=conetto) -->
+<!-- ![RStudio CRAN downloads](http://cranlogs.r-pkg.org/badges/grand-total/conetto) -->
+<!-- ![RStudio CRAN monthly downloads](http://cranlogs.r-pkg.org/badges/conetto) -->
+<!-- [![Rdocumentation](http://www.rdocumentation.org/badges/version/conetto)](http://www.rdocumentation.org/packages/conetto) -->
+<!-- Dev status -->
+[![Project Status: Active – The project has reached a stable, usable
+state and is being actively
+developed.](http://www.repostatus.org/badges/latest/wip.svg)](http://www.repostatus.org/#wip)
+[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+
+<!-- <\!-- Package Review -\-> -->
+<!-- [![](https://badges.ropensci.org/300_status.svg)](https://github.com/ropensci/onboarding/issues/300) -->
+<!-- [![status](http://joss.theoj.org/papers/334d80d5508056dc6e7e17c6fd3ed5a6/status.svg)](http://joss.theoj.org/papers/334d80d5508056dc6e7e17c6fd3ed5a6) -->
+<!-- <\!-- Archiving -\-> -->
+<!-- [![DOI](https://zenodo.org/badge/102645585.svg)](https://zenodo.org/badge/latestdoi/102645585) -->
 -   Network models are a useful representation of systems (Woodward et
     al. 2010).
 -   Because it is not always possible to directly observe relationships
@@ -22,7 +49,7 @@ Currently, the package is still in beta but it can be installed via the
 Example
 =======
 
-The basic usage of the *connetto* package is to generate network models.
+The basic usage of the *conetto* package is to generate network models.
 To do this, we need a matrix of co-occurrence values, which will be
 passed into the `coNet` function:
 
@@ -32,18 +59,17 @@ passed into the `coNet` function:
     D <- c(0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0)
     M <- data.frame(A, B, C, D)
     coNet(M)
-
-    ##           A         B          C          D
-    ## A 0.0000000 0.4090909  0.0000000  0.0000000
-    ## B 0.2922078 0.0000000  0.0000000  0.0000000
-    ## C 0.0000000 0.0000000  0.0000000 -0.3181818
-    ## D 0.0000000 0.0000000 -0.4370629  0.0000000
+    #>           A         B          C          D
+    #> A 0.0000000 0.4090909  0.0000000  0.0000000
+    #> B 0.2922078 0.0000000  0.0000000  0.0000000
+    #> C 0.0000000 0.0000000  0.0000000 -0.3181818
+    #> D 0.0000000 0.0000000 -0.4370629  0.0000000
 
 The `coNet` function returns of square matrix with the same number of
 rows and columns equal to the number of columns in the co-occurrence
 matrix. There are a couple of features that are useful to note here:
 
--   First, the matrix is not symetric, that is, the top and bottom
+-   First, the matrix is not symmetric, that is, the top and bottom
     halves are not equal. This is because the dependency of two
     variables is based on both their independent occurrences and their
     co-occurrences.
@@ -59,7 +85,7 @@ matrix. There are a couple of features that are useful to note here:
     conditional probabilities minus the observed joint probabilities
     (i.e. *P(A|B) - P(A,B)*). Therefore, if the conditional probability
     is less than the observed joint probability, the resulting
-    "relative" value will be negative, while the oposite results in a
+    "relative" value will be negative, while the opposite results in a
     positive value for the network. The "raw", un-relativized, values
     can be returned via the *raw* argument.
 
@@ -71,36 +97,35 @@ datasets, where multiple networks have been observed. Two other
 functions were written to provide a way to analyze these network sets.
 
 One function, `meanNet`, will calculate the "mean" or average of a set
-of networks. The resul is the cell-wise summation of all matrices
+of networks. The result is the cell-wise summation of all matrices
 divided by the total number of matrices. This function requires that the
-set of networks all have the same dinensionaity and that they are
+set of networks all have the same dimensionality and that they are
 organized into a list.
 
     net.l <- lapply(1:10, function(x) matrix(runif(100), nrow = 10))
     meanNet(net.l)
-
-    ##              [,1]        [,2]        [,3]        [,4]        [,5]
-    ##  [1,] 0.011470203 0.008912662 0.008699060 0.008558717 0.007527885
-    ##  [2,] 0.011795746 0.009821578 0.009583793 0.006191786 0.009631281
-    ##  [3,] 0.009235267 0.011730530 0.009584768 0.006307902 0.008825257
-    ##  [4,] 0.013106830 0.008191280 0.011803261 0.007350079 0.008705289
-    ##  [5,] 0.010992779 0.013162659 0.010739828 0.010779388 0.008844658
-    ##  [6,] 0.010845213 0.009047543 0.009293344 0.009002645 0.009602016
-    ##  [7,] 0.009201801 0.009202980 0.011491353 0.011477969 0.010715238
-    ##  [8,] 0.010212721 0.010377775 0.009206959 0.010396569 0.009832462
-    ##  [9,] 0.014632893 0.010590662 0.008286780 0.006919968 0.013984547
-    ## [10,] 0.008717699 0.009383869 0.011099898 0.009662004 0.011092111
-    ##              [,6]        [,7]        [,8]        [,9]       [,10]
-    ##  [1,] 0.013337228 0.015487771 0.008948011 0.009307121 0.008178073
-    ##  [2,] 0.012584632 0.011484549 0.009860737 0.008966573 0.008450599
-    ##  [3,] 0.009003541 0.011525584 0.012614740 0.009372622 0.007874979
-    ##  [4,] 0.009161371 0.011253833 0.010705823 0.006109570 0.006438881
-    ##  [5,] 0.011587151 0.009237962 0.011455079 0.011545517 0.010176229
-    ##  [6,] 0.010335947 0.011244433 0.009997725 0.013744458 0.010822752
-    ##  [7,] 0.012166506 0.008423511 0.008778231 0.008535473 0.007406676
-    ##  [8,] 0.009526705 0.008394695 0.010632284 0.010416194 0.010686817
-    ##  [9,] 0.010794560 0.008683500 0.010696452 0.010203321 0.007848211
-    ## [10,] 0.009670585 0.008670731 0.011060216 0.009077528 0.011684811
+    #>              [,1]        [,2]        [,3]        [,4]        [,5]
+    #>  [1,] 0.011925199 0.012059462 0.007362976 0.013136428 0.008531698
+    #>  [2,] 0.012269537 0.007459328 0.009484167 0.008180385 0.012027616
+    #>  [3,] 0.009357091 0.013099752 0.010679847 0.007776129 0.007899959
+    #>  [4,] 0.010976843 0.007764211 0.012033344 0.009928008 0.010547505
+    #>  [5,] 0.009755056 0.010850444 0.005195883 0.009631920 0.011152215
+    #>  [6,] 0.010801694 0.009714833 0.008592533 0.009003186 0.011373885
+    #>  [7,] 0.011072457 0.008319544 0.012819159 0.009028809 0.010579306
+    #>  [8,] 0.007567914 0.007575848 0.011085289 0.009738816 0.010148237
+    #>  [9,] 0.008426937 0.009538864 0.014105669 0.008378551 0.008653160
+    #> [10,] 0.010860360 0.009176083 0.007745048 0.010026654 0.013252262
+    #>              [,6]        [,7]        [,8]        [,9]       [,10]
+    #>  [1,] 0.008999049 0.011437284 0.008400142 0.007213329 0.012995198
+    #>  [2,] 0.008910517 0.013517969 0.009791315 0.009546631 0.010356244
+    #>  [3,] 0.009365705 0.011976372 0.010949289 0.006962665 0.008038372
+    #>  [4,] 0.012039764 0.007805574 0.012756370 0.010291163 0.010497061
+    #>  [5,] 0.008757137 0.013133132 0.010290494 0.007164220 0.009048236
+    #>  [6,] 0.011242745 0.008139384 0.010521274 0.011028260 0.008674345
+    #>  [7,] 0.009723805 0.009444477 0.009774805 0.011505433 0.008420383
+    #>  [8,] 0.010709598 0.010586706 0.012387549 0.009767367 0.008239512
+    #>  [9,] 0.010003455 0.009750125 0.010661707 0.011550489 0.009282591
+    #> [10,] 0.010046290 0.013341274 0.007444317 0.011448963 0.009391811
 
 Another function, `distNet`, facilitates the calculation of a distance
 matrix for a set of networks. Two metrics are provided, Euclidean and
@@ -112,27 +137,26 @@ analyses, such as ordination.
 
     net.d <- distNet(net.l)
     net.d
-
-    ##           1        2        3        4        5        6        7        8
-    ## 2  3.685185                                                               
-    ## 3  4.103205 4.910108                                                      
-    ## 4  4.059925 5.415959 3.906642                                             
-    ## 5  3.811321 4.191372 3.469238 4.073549                                    
-    ## 6  4.104992 4.984178 4.144367 3.910250 3.948777                           
-    ## 7  4.067339 4.372368 4.201779 4.498542 3.636921 4.073480                  
-    ## 8  3.995967 4.986629 3.666242 3.853520 3.671780 3.618621 4.234356         
-    ## 9  4.212206 5.327500 4.183762 3.635437 4.098204 3.637159 5.168281 3.789417
-    ## 10 4.443790 4.238941 4.026266 4.512098 4.135276 3.711632 3.877616 4.065636
-    ##           9
-    ## 2          
-    ## 3          
-    ## 4          
-    ## 5          
-    ## 6          
-    ## 7          
-    ## 8          
-    ## 9          
-    ## 10 4.598224
+    #>           1        2        3        4        5        6        7        8
+    #> 2  5.489187                                                               
+    #> 3  4.352817 4.596120                                                      
+    #> 4  4.437816 3.671405 4.318075                                             
+    #> 5  3.862560 4.074565 4.602765 3.905432                                    
+    #> 6  4.023902 3.934514 3.839549 3.403853 3.047458                           
+    #> 7  4.631788 4.405867 4.676913 4.232775 2.704668 3.632409                  
+    #> 8  3.559593 5.603289 4.354567 4.794376 3.598639 3.860003 4.333955         
+    #> 9  4.580029 4.761849 4.211596 4.213373 3.647344 3.749577 4.322715 4.259276
+    #> 10 4.906895 4.239938 4.619852 4.227949 3.387280 3.292346 4.194670 4.527126
+    #>           9
+    #> 2          
+    #> 3          
+    #> 4          
+    #> 5          
+    #> 6          
+    #> 7          
+    #> 8          
+    #> 9          
+    #> 10 4.348531
 
 References
 ==========

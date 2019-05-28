@@ -16,7 +16,7 @@ Returns a matrix of means.
 }
 \description{
 Given a set of networks in matrix format, this function will
-calculate the cell-wise (Hadimard) mean.
+calculate the cell-wise (Hadamard) mean.
 }
 \examples{
 

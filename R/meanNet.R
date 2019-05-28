@@ -1,7 +1,7 @@
 #' Calculate the mean of a set of networks.
 #' 
 #' Given a set of networks in matrix format, this function will
-#' calculate the cell-wise (Hadimard) mean.
+#' calculate the cell-wise (Hadamard) mean.
 #' 
 #' @param x A list of networks to be used for calculating distances.
 #' @param zero.na LOGICAL: Should NA values be treated as zeros?

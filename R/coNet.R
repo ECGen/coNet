@@ -8,9 +8,9 @@
 #' @param x A co-occurrence matrix with observations in rows and
 #'     species in columns.
 #' @param ci.p Interval used for edge removal in percent (e.g. use 95
-#'     for a nintey-five percent confidence interval).
+#'     for a ninety-five percent confidence interval).
 #' @param raw LOGICAL: should the original matrix of conditional
-#'     probabilities, prior to removel of conditional probabilities
+#'     probabilities, prior to removal of conditional probabilities
 #'     that are within the removal interval.
 #' @return An interaction network model in matrix form with
 #'     "non-significant" links removed and relativized to the joint
@@ -23,7 +23,7 @@
 #'     probabilities.
 #' @note Given a set of repeated observations of variables
 #'     (e.g. biological species), a network of model of
-#'     interdependencies is estimated using conditional probabilties
+#'     interdependence is estimated using conditional probabilities
 #'     (\eqn{P(S_i|S_j)}). This is calculated using Bayes' Theorem, as
 #'     \eqn{P(S_i|S_j) = \frac{P(S_i,S_j)}{P(S_j)}}. \eqn{P(S_i,S_j)}
 #'     is the joint probability, the probability of observing

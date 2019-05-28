@@ -63,7 +63,7 @@ devtools::install_github("ECGen/coNet")
 # Example
 
 
-The basic usage of the *connetto* package is to generate network
+The basic usage of the *conetto* package is to generate network
 models. To do this, we need a matrix of co-occurrence values, which
 will be passed into the `coNet` function:
 
@@ -80,7 +80,7 @@ The `coNet` function returns of square matrix with the same number of
 rows and columns equal to the number of columns in the co-occurrence
 matrix. There are a couple of features that are useful to note here:
 
-* First, the matrix is not symetric, that is, the top and bottom
+* First, the matrix is not symmetric, that is, the top and bottom
   halves are not equal. This is because the dependency of two
   variables is based on both their independent occurrences and their
   co-occurrences.
@@ -96,7 +96,7 @@ matrix. There are a couple of features that are useful to note here:
   conditional probabilities minus the observed joint probabilities
   (i.e. *P(A|B) - P(A,B)*). Therefore, if the conditional probability
   is less than the observed joint probability, the resulting
-  "relative" value will be negative, while the oposite results in a
+  "relative" value will be negative, while the opposite results in a
   positive value for the network. The "raw", un-relativized, values
   can be returned via the *raw* argument.
 
@@ -109,9 +109,9 @@ functions were written to provide a way to analyze these network
 sets. 
 
 One function, `meanNet`, will calculate the "mean" or average of a set
-of networks. The resul is the cell-wise summation of all matrices
+of networks. The result is the cell-wise summation of all matrices
 divided by the total number of matrices. This function requires that
-the set of networks all have the same dinensionaity and that they are
+the set of networks all have the same dimensionality and that they are
 organized into a list.
 
 ```{r}

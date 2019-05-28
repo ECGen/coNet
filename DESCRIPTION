@@ -10,6 +10,7 @@ Imports: Rdpack, ecodist
 RdMacros: Rdpack
 Encoding: UTF-8
 License: CC0
+Language: en-US
 RoxygenNote: 6.1.1
 Suggests: 
     testthat (>= 2.1.0)

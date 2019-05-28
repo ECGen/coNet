@@ -11,10 +11,10 @@ coNet(x = "co-occurrence matrix", ci.p = 95, raw = FALSE)
 species in columns.}
 
 \item{ci.p}{Interval used for edge removal in percent (e.g. use 95
-for a nintey-five percent confidence interval).}
+for a ninety-five percent confidence interval).}
 
 \item{raw}{LOGICAL: should the original matrix of conditional
-probabilities, prior to removel of conditional probabilities
+probabilities, prior to removal of conditional probabilities
 that are within the removal interval.}
 }
 \value{
@@ -38,7 +38,7 @@ probabilities.
 \note{
 Given a set of repeated observations of variables
     (e.g. biological species), a network of model of
-    interdependencies is estimated using conditional probabilties
+    interdependence is estimated using conditional probabilities
     (\eqn{P(S_i|S_j)}). This is calculated using Bayes' Theorem, as
     \eqn{P(S_i|S_j) = \frac{P(S_i,S_j)}{P(S_j)}}. \eqn{P(S_i,S_j)}
     is the joint probability, the probability of observing
