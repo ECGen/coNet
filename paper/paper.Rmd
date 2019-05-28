@@ -1,5 +1,5 @@
 ---
-title: 'coNet: Create network models in R using co-occurrence data'
+title: 'conetto: Create network models in R using co-occurrence data'
 tags:
   - R
   - networks
@@ -175,7 +175,7 @@ dat <- dat[, -1:-2]
 dat[is.na(dat)] <- 0
 dat[dat != 0] <- 1
 ## 
-pb.cn <- coNet::coNet(dat, ci.p = 99)
+pb.cn <- conetto::coNet(dat, ci.p = 99)
 pb.cn <- pb.cn[apply(abs(pb.cn), 1, sum) > 0, apply(abs(pb.cn), 2, sum) > 0]
 spp <- rownames(pb.cn)
 rownames(pb.cn) <- colnames(pb.cn) <- 1:nrow(pb.cn)
