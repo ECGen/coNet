@@ -17,8 +17,12 @@ test_that("distNet works", {
     load("net.l.rda")
     load("net.d.rda")
     load("net.d.bc.rda")
-    expect_true(all(distNet(net.l) == net.d))
-    expect_true(all(distNet(net.l, method = "bray") == net.d.bc))
+    expect_true(all(
+        round(distNet(net.l), 5) == 
+        net.d))
+    expect_true(all(
+        round(distNet(net.l, method = "bray"), 5) == 
+        net.d.bc))
 })
 
 context("Supporting functions")
