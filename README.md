@@ -1,7 +1,4 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-coNet
-=====
-
 <!-- # ijtiff  <img src="man/figures/logo.png" height="140" align="right"> -->
 <!-- Code status -->
 [![Travis Build
@@ -25,20 +22,51 @@ developed.](http://www.repostatus.org/badges/latest/wip.svg)](http://www.reposta
 <!-- [![status](http://joss.theoj.org/papers/334d80d5508056dc6e7e17c6fd3ed5a6/status.svg)](http://joss.theoj.org/papers/334d80d5508056dc6e7e17c6fd3ed5a6) -->
 <!-- <\!-- Archiving -\-> -->
 <!-- [![DOI](https://zenodo.org/badge/102645585.svg)](https://zenodo.org/badge/latestdoi/102645585) -->
--   Network models are a useful representation of systems (Woodward et
-    al. 2010).
--   Because it is not always possible to directly observe relationships
-    (i.e. ecological interactions) spatial or temporal patterns of
-    co-occurrence can be used to render models of interaction networks
-    (Araújo et al. 2011).
--   The *conetto* implements an adaptation of the method developed by
-    (Araújo et al. 2011) expanded with the application of Bayesian
-    probability to generate network models and provides several
-    functions useful for comparative analysis of sets of co-occurrence
-    based networks.
-
-Install
+conetto
 =======
+
+A toolbox for co-occurrence based network modeling
+
+Network models are a useful representation of systems (Woodward et al.
+2010). Because it is not always possible to directly observe
+relationships (i.e. ecological interactions) spatial or temporal
+patterns of co-occurrence can be used to render models of interaction
+networks (Araújo et al. 2011). *conetto* implements an adaptation of the
+method developed by (Araújo et al. 2011) expanded with the application
+of Bayesian probability to generate network models and provides several
+functions useful for comparative analysis of sets of co-occurrence based
+networks.
+
+The Method
+==========
+
+The network modeling is based on conditional probability. Ultimately, we
+are interested in an estimate of how much one variable (A) affects
+another (B), and visa-versa. *conetto* approaches this by calculating
+the difference between the conditional and independent probabilities of
+species paris using the observed occurrences (*A* and *B*) and
+co-occurrences (*A*, *B*) of the variables of interest from a set of
+observations (*N*).
+
+-   Independent probabilities (*P*(*A*)=*A*/*N* and *P*(*B*)=*B*/*N*)
+-   Joint probabilities *P*(*A*, *B*)=(*A*, *B*)/*N*
+-   Conditional probabilities *P*(*A*|*B*)=*P*(*B*|*A*)*P*(*A*)/*P*(*B*)
+
+Since there is uuncertainly in whether or not two species are dependent,
+*conetto* uses a interval based test to determine whether or not to use
+the observed joint probability *O*\[*P*(*A*, *B*)\] = (*A*, *B*)/*N* or
+the expected probability using an analytical null model
+*E*\[*P*(*A*, *B*)\] = *P*(*A*)*P*(*B*). Via the Chain Rule of
+probabililty *P*(*A*, *B*)=*P*(*B*|*A*)*P*(*A*), such that if
+*E*\[*P*(*A*, *B*)\] is used then
+*P*(*A*|*B*)=*P*(*A*)*P*(*B*)/*P*(*B*), which reduces to
+*P*(*A*|*B*)=*P*(*A*) and A is conditionally independent from B. We can
+then subtract the independent probability matrix from the interval test
+modified conditional probability matrix, which produces a matrix of the
+dependency among the variables of interest.
+
+Installation
+============
 
 Currently, the package is still in beta but it can be installed via the
 *devtools* package.
@@ -46,8 +74,8 @@ Currently, the package is still in beta but it can be installed via the
     install.packages("devtools")
     devtools::install_github("ECGen/coNet")
 
-Example
-=======
+How to use the package
+======================
 
 The basic usage of the *conetto* package is to generate network models.
 To do this, we need a matrix of co-occurrence values, which will be
@@ -76,10 +104,10 @@ matrix. There are a couple of features that are useful to note here:
     *P*(*B*|*A*)=*P*(*A*, *B*)/*P*(*A*).
 -   Also, some values are negative. This is because the network is
     comprised of the difference between the threshold adjusted
-    conditional probabilities minus the observed joint probabilities
-    (i.e. *P*(*A*|*B*)−*P*(*A*, *B*)). Therefore, if the conditional
-    probability is less than the observed joint probability the
-    resulting "relative" value will be negative, while the opposite
+    conditional probabilities minus the observed independent
+    probabilities (i.e. *P*(*A*|*B*)−*P*(*A*)). Therefore, if the
+    conditional probability is less than the observed joint probability
+    the resulting "relative" value will be negative, while the opposite
     results in a positive value for the network. The "raw",
     un-relativized, values can be returned via the *raw* argument.
 -   Last, some of the values in the network are zero. This is because
@@ -107,27 +135,27 @@ organized into a list.
     net.l <- lapply(1:3, function(x) matrix(runif(9), nrow = 3))
     net.l
     #> [[1]]
-    #>             [,1]      [,2]      [,3]
-    #> [1,] 0.004768099 0.6250689 0.8081936
-    #> [2,] 0.588507287 0.4921817 0.5744984
-    #> [3,] 0.170048396 0.8444180 0.9541053
+    #>           [,1]      [,2]       [,3]
+    #> [1,] 0.2176072 0.9396594 0.03934002
+    #> [2,] 0.0253363 0.6823775 0.01446352
+    #> [3,] 0.6784387 0.9596019 0.37260966
     #> 
     #> [[2]]
-    #>           [,1]      [,2]      [,3]
-    #> [1,] 0.7431215 0.2739344 0.1941765
-    #> [2,] 0.9402283 0.5446723 0.9610944
-    #> [3,] 0.2451914 0.6548560 0.2403633
+    #>           [,1]      [,2]       [,3]
+    #> [1,] 0.7125367 0.8690468 0.03428907
+    #> [2,] 0.1678450 0.1472688 0.04872582
+    #> [3,] 0.4674624 0.7237802 0.10069652
     #> 
     #> [[3]]
-    #>           [,1]       [,2]      [,3]
-    #> [1,] 0.8601541 0.78038554 0.4582401
-    #> [2,] 0.7147409 0.36457445 0.2810187
-    #> [3,] 0.4468600 0.01007309 0.8142454
+    #>           [,1]      [,2]       [,3]
+    #> [1,] 0.9596650 0.5046081 0.96224106
+    #> [2,] 0.5379189 0.5603185 0.61608585
+    #> [3,] 0.9775682 0.3175659 0.01294727
     meanNet(net.l)
-    #>            [,1]       [,2]      [,3]
-    #> [1,] 0.11021758 0.11510769 0.1001123
-    #> [2,] 0.15377104 0.09605589 0.1245131
-    #> [3,] 0.05908954 0.10345278 0.1376801
+    #>            [,1]      [,2]       [,3]
+    #> [1,] 0.14939197 0.1828706 0.08188694
+    #> [2,] 0.05779446 0.1098786 0.05369763
+    #> [3,] 0.16786312 0.1581777 0.03843899
 
 Another function, `distNet`, facilitates the calculation of a distance
 matrix for a set of networks. Two metrics are provided, Euclidean and
@@ -140,8 +168,8 @@ analyses, such as ordination.
     net.d <- distNet(net.l)
     net.d
     #>           1         2
-    #> 2 1.2055934          
-    #> 3 0.8668495 1.5698794
+    #> 2 0.5896863          
+    #> 3 1.8480532 2.0504285
 
 References
 ==========
