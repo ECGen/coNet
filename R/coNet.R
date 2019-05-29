@@ -4,7 +4,7 @@
 #' co-occurrences (i.e. repeated observations in space). This function
 #' is based on the method described in
 #' \insertCite{Araujo2011}{conetto} updated to use conditional
-#' probabilities.  
+#' probabilities.
 #' @param x A co-occurrence matrix with observations in rows and
 #'     species in columns.
 #' @param ci.p Interval used for edge removal in percent (e.g. use 95
@@ -13,21 +13,21 @@
 #'     probabilities, prior to removal of conditional probabilities
 #'     that are within the removal interval.
 #' @return An interaction network model in matrix form with
-#'     "non-significant" links removed and relativized to the joint
-#'     probabilities (DEFAULT) or not (raw = TRUE). If relativized,
-#'     the matrix is the deviations of the conditional probabilities
-#'     from the joint probabilities. For conditional probabilities
-#'     equal to the joint probabilities, this value is 0. This
-#'     value can also range from 1 to -1, depending on the magnitude
-#'     of the difference between the conditional and joint
-#'     probabilities.
+#'     "non-significant" links removed and relativized to the
+#'     marginal probabilities (DEFAULT) or not (raw = TRUE). If
+#'     relativized, the matrix is the deviation of the conditional
+#'     probabilities from the marginal probabilities. For
+#'     conditional probabilities equal to the marginal
+#'     probabilities, this value is 0. This value can range from 1 to
+#'     -1, depending on the magnitude of the difference between the
+#'     conditional and marginal probabilities.
 #' @note Given a set of repeated observations of variables
 #'     (e.g. biological species), a network of model of
 #'     interdependence is estimated using conditional probabilities
 #'     (\eqn{P(S_i|S_j)}). This is calculated using Bayes' Theorem, as
 #'     \eqn{P(S_i|S_j) = \frac{P(S_i,S_j)}{P(S_j)}}. \eqn{P(S_i,S_j)}
-#'     is the joint probability, the probability of observing
-#'     species (\eqn{S_i} and \eqn{S_j}), which is calculated from the
+#'     is the marginal probability, the probability of observing species
+#'     (\eqn{S_i} and \eqn{S_j}), which is calculated from the
 #'     individual probabilities of each species (\eqn{P(S)}). The
 #'     total abundance of each species is used to quantify the
 #'     individual probabilities of each species, such the \eqn{P(S_i)
@@ -38,7 +38,7 @@
 #'     \frac{(S_i,S_j)}{N}}. For more details, such as the interval
 #'     based test, see \insertCite{Araujo2011}{conetto}.
 #' @author Matthew K. Lau
-#' @seealso \code{\link{cond_prob}} \code{\link{cond_net}} 
+#' @seealso \code{\link{cond_prob}} \code{\link{cond_net}}
 #' @references \insertAllCited{}
 #' @examples
 #'

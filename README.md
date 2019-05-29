@@ -4,9 +4,9 @@ coNet
 
 <!-- # ijtiff  <img src="man/figures/logo.png" height="140" align="right"> -->
 <!-- Code status -->
-[![Build
+[![Travis Build
 Status](https://travis-ci.org/ECGen/conetto.svg?branch=master)](https://travis-ci.org/ECGen/conetto)
-[![Build
+[![Travis Build
 Status](https://travis-ci.org/ECGen/conetto.svg?branch=dev)](https://travis-ci.org/ECGen/conetto)
 
 <!-- R status -->
@@ -72,29 +72,31 @@ matrix. There are a couple of features that are useful to note here:
 -   First, the matrix is not symmetric, that is, the top and bottom
     halves are not equal. This is because the dependency of two
     variables is based on both their independent occurrences and their
-    co-occurrences.
--   Also, some of the values in the network are zero. This is because
+    co-occurrences: *P*(*A*|*B*)=*P*(*A*, *B*)/*P*(*B*) and
+    *P*(*B*|*A*)=*P*(*A*, *B*)/*P*(*A*).
+-   Also, some values are negative. This is because the network is
+    comprised of the difference between the threshold adjusted
+    conditional probabilities minus the observed joint probabilities
+    (i.e. *P*(*A*|*B*)−*P*(*A*, *B*)). Therefore, if the conditional
+    probability is less than the observed joint probability the
+    resulting "relative" value will be negative, while the opposite
+    results in a positive value for the network. The "raw",
+    un-relativized, values can be returned via the *raw* argument.
+-   Last, some of the values in the network are zero. This is because
     `coNet` conducts a test that compares the observed co-occurrences to
     a theoretical "null" co-occurrence interval. If the observed
     co-occurrences are within the interval, the conditional probability
-    is set equal to the joint probability. The threshold for the null
-    interval test can be adjusted using the *ci.p* argument (DEFAULT =
-    95).
--   Last, some values are negative. This is because the network is
-    comprised of the difference between the threshold adjusted
-    conditional probabilities minus the observed joint probabilities
-    (i.e. *P(A|B) - P(A,B)*). Therefore, if the conditional probability
-    is less than the observed joint probability, the resulting
-    "relative" value will be negative, while the opposite results in a
-    positive value for the network. The "raw", un-relativized, values
-    can be returned via the *raw* argument.
+    is set equal to the joint probability. Then, when relativized, the
+    resulting values are zero (i.e. *P*(*A*, *B*)−*P*(*A*, *B*)=0). The
+    threshold for the null interval test can be adjusted using the
+    *ci.p* argument (DEFAULT = 95).
 
 Network comparisons
 -------------------
 
-The `coNet` function was developed for the analysis of replicated
-datasets, where multiple networks have been observed. Two other
-functions were written to provide a way to analyze these network sets.
+The `coNet` function was developed for use with replicated datasets,
+where multiple networks have been observed. Two other functions were
+written to provide a way to analyze these network sets.
 
 One function, `meanNet`, will calculate the "mean" or average of a set
 of networks. The result is the cell-wise summation of all matrices
@@ -102,30 +104,30 @@ divided by the total number of matrices. This function requires that the
 set of networks all have the same dimensionality and that they are
 organized into a list.
 
-    net.l <- lapply(1:10, function(x) matrix(runif(100), nrow = 10))
+    net.l <- lapply(1:3, function(x) matrix(runif(9), nrow = 3))
+    net.l
+    #> [[1]]
+    #>             [,1]      [,2]      [,3]
+    #> [1,] 0.004768099 0.6250689 0.8081936
+    #> [2,] 0.588507287 0.4921817 0.5744984
+    #> [3,] 0.170048396 0.8444180 0.9541053
+    #> 
+    #> [[2]]
+    #>           [,1]      [,2]      [,3]
+    #> [1,] 0.7431215 0.2739344 0.1941765
+    #> [2,] 0.9402283 0.5446723 0.9610944
+    #> [3,] 0.2451914 0.6548560 0.2403633
+    #> 
+    #> [[3]]
+    #>           [,1]       [,2]      [,3]
+    #> [1,] 0.8601541 0.78038554 0.4582401
+    #> [2,] 0.7147409 0.36457445 0.2810187
+    #> [3,] 0.4468600 0.01007309 0.8142454
     meanNet(net.l)
-    #>              [,1]        [,2]        [,3]        [,4]        [,5]
-    #>  [1,] 0.011925199 0.012059462 0.007362976 0.013136428 0.008531698
-    #>  [2,] 0.012269537 0.007459328 0.009484167 0.008180385 0.012027616
-    #>  [3,] 0.009357091 0.013099752 0.010679847 0.007776129 0.007899959
-    #>  [4,] 0.010976843 0.007764211 0.012033344 0.009928008 0.010547505
-    #>  [5,] 0.009755056 0.010850444 0.005195883 0.009631920 0.011152215
-    #>  [6,] 0.010801694 0.009714833 0.008592533 0.009003186 0.011373885
-    #>  [7,] 0.011072457 0.008319544 0.012819159 0.009028809 0.010579306
-    #>  [8,] 0.007567914 0.007575848 0.011085289 0.009738816 0.010148237
-    #>  [9,] 0.008426937 0.009538864 0.014105669 0.008378551 0.008653160
-    #> [10,] 0.010860360 0.009176083 0.007745048 0.010026654 0.013252262
-    #>              [,6]        [,7]        [,8]        [,9]       [,10]
-    #>  [1,] 0.008999049 0.011437284 0.008400142 0.007213329 0.012995198
-    #>  [2,] 0.008910517 0.013517969 0.009791315 0.009546631 0.010356244
-    #>  [3,] 0.009365705 0.011976372 0.010949289 0.006962665 0.008038372
-    #>  [4,] 0.012039764 0.007805574 0.012756370 0.010291163 0.010497061
-    #>  [5,] 0.008757137 0.013133132 0.010290494 0.007164220 0.009048236
-    #>  [6,] 0.011242745 0.008139384 0.010521274 0.011028260 0.008674345
-    #>  [7,] 0.009723805 0.009444477 0.009774805 0.011505433 0.008420383
-    #>  [8,] 0.010709598 0.010586706 0.012387549 0.009767367 0.008239512
-    #>  [9,] 0.010003455 0.009750125 0.010661707 0.011550489 0.009282591
-    #> [10,] 0.010046290 0.013341274 0.007444317 0.011448963 0.009391811
+    #>            [,1]       [,2]      [,3]
+    #> [1,] 0.11021758 0.11510769 0.1001123
+    #> [2,] 0.15377104 0.09605589 0.1245131
+    #> [3,] 0.05908954 0.10345278 0.1376801
 
 Another function, `distNet`, facilitates the calculation of a distance
 matrix for a set of networks. Two metrics are provided, Euclidean and
@@ -137,26 +139,9 @@ analyses, such as ordination.
 
     net.d <- distNet(net.l)
     net.d
-    #>           1        2        3        4        5        6        7        8
-    #> 2  5.489187                                                               
-    #> 3  4.352817 4.596120                                                      
-    #> 4  4.437816 3.671405 4.318075                                             
-    #> 5  3.862560 4.074565 4.602765 3.905432                                    
-    #> 6  4.023902 3.934514 3.839549 3.403853 3.047458                           
-    #> 7  4.631788 4.405867 4.676913 4.232775 2.704668 3.632409                  
-    #> 8  3.559593 5.603289 4.354567 4.794376 3.598639 3.860003 4.333955         
-    #> 9  4.580029 4.761849 4.211596 4.213373 3.647344 3.749577 4.322715 4.259276
-    #> 10 4.906895 4.239938 4.619852 4.227949 3.387280 3.292346 4.194670 4.527126
-    #>           9
-    #> 2          
-    #> 3          
-    #> 4          
-    #> 5          
-    #> 6          
-    #> 7          
-    #> 8          
-    #> 9          
-    #> 10 4.348531
+    #>           1         2
+    #> 2 1.2055934          
+    #> 3 0.8668495 1.5698794
 
 References
 ==========

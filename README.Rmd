@@ -14,7 +14,6 @@ knitr::opts_chunk$set(
 original_files <- dir()
 ```
 
-# coNet
 
 <!-- # ijtiff  <img src="man/figures/logo.png" height="140" align="right"> -->
 
@@ -39,18 +38,46 @@ original_files <- dir()
 <!-- <\!-- Archiving -\-> -->
 <!-- [![DOI](https://zenodo.org/badge/102645585.svg)](https://zenodo.org/badge/latestdoi/102645585) -->
 
+# conetto
 
-* Network models are a useful representation of systems [@Woodward2010].
-* Because it is not always possible to directly observe relationships
-  (i.e. ecological interactions) spatial or temporal patterns of
-  co-occurrence can be used to render models of interaction networks
-  [@Araujo2011].
-* The *conetto* implements an adaptation of the method developed by
-  [@Araujo2011] expanded with the application of Bayesian probability
-  to generate network models and provides several functions useful for
-  comparative analysis of sets of co-occurrence based networks.
+A toolbox for co-occurrence based network modeling 
 
-# Install
+Network models are a useful representation of systems
+[@Woodward2010]. Because it is not always possible to directly observe
+relationships (i.e. ecological interactions) spatial or temporal
+patterns of co-occurrence can be used to render models of interaction
+networks [@Araujo2011]. *conetto* implements an adaptation of the
+method developed by [@Araujo2011] expanded with the application of
+Bayesian probability to generate network models and provides several
+functions useful for comparative analysis of sets of co-occurrence
+based networks.
+
+# The Method
+
+The network modeling is based on conditional probability. Ultimately,
+we are interested in an estimate of how much one variable (A) affects
+another (B), and visa-versa. *conetto* approaches this by calculating
+the difference between the conditional and independent probabilities
+of species paris using the observed occurrences ($A$ and $B$) and
+co-occurrences ($A,B$) of the variables of interest from a set of
+observations ($N$). 
+
+* Independent probabilities ($P(A) = A/N$ and $P(B) = B/N$) 
+* Joint probabilities $P(A,B) = (A,B) / N$
+* Conditional probabilities $P(A|B) = P(B|A) P(A) / P(B)$
+
+Since there is uuncertainly in whether or not two species are
+dependent, *conetto* uses a interval based test to determine whether
+or not to use the observed joint probability $O[P(A,B)] = (A,B)/N$ or
+the expected probability using an analytical null model $E[P(A,B)] =
+P(A)P(B)$. Via the Chain Rule of probabililty $P(A,B) = P(B|A)P(A)$,
+such that if $E[P(A,B)]$ is used then $P(A|B) = P(A)P(B) / P(B)$,
+which reduces to $P(A|B) = P(A)$ and A is conditionally independent
+from B. We can then subtract the independent probability matrix from
+the interval test modified conditional probability matrix, which
+produces a matrix of the dependency among the variables of interest.
+
+# Installation
 
 Currently, the package is still in beta but it can be installed via
 the *devtools* package.
@@ -59,8 +86,11 @@ the *devtools* package.
 install.packages("devtools")
 devtools::install_github("ECGen/coNet")
 ```
+```{r echo = FALSE}
+library(conetto)
+```
 
-# Example
+# How to use the package
 
 
 The basic usage of the *conetto* package is to generate network
@@ -83,30 +113,31 @@ matrix. There are a couple of features that are useful to note here:
 * First, the matrix is not symmetric, that is, the top and bottom
   halves are not equal. This is because the dependency of two
   variables is based on both their independent occurrences and their
-  co-occurrences.
-* Also, some of the values in the network are zero. This is because
+  co-occurrences: $P(A|B) = P(A,B)/P(B)$ and $P(B|A) =
+  P(A,B)/P(A)$. 
+* Also, some values are negative. This is because the network is
+  comprised of the difference between the threshold adjusted
+  conditional probabilities minus the observed independent
+  probabilities (i.e. $P(A|B) - P(A)$). Therefore, if the conditional
+  probability is less than the observed joint probability the
+  resulting "relative" value will be negative, while the opposite
+  results in a positive value for the network. The "raw",
+  un-relativized, values can be returned via the *raw* argument.
+* Last, some of the values in the network are zero. This is because
   `coNet` conducts a test that compares the observed co-occurrences to
   a theoretical "null" co-occurrence interval. If the observed
   co-occurrences are within the interval, the conditional probability
-  is set equal to the joint probability. The threshold for the null
-  interval test can be adjusted using the *ci.p* argument (DEFAULT =
-  95).
-* Last, some values are negative. This is because the network is
-  comprised of the difference between the threshold adjusted
-  conditional probabilities minus the observed joint probabilities
-  (i.e. *P(A|B) - P(A,B)*). Therefore, if the conditional probability
-  is less than the observed joint probability, the resulting
-  "relative" value will be negative, while the opposite results in a
-  positive value for the network. The "raw", un-relativized, values
-  can be returned via the *raw* argument.
+  is set equal to the joint probability. Then, when relativized, the
+  resulting values are zero (i.e. $P(A,B) - P(A,B) = 0$). The
+  threshold for the null interval test can be adjusted using the
+  *ci.p* argument (DEFAULT = 95).
 
 
 ## Network comparisons
 
-The `coNet` function was developed for the analysis of replicated
-datasets, where multiple networks have been observed. Two other
-functions were written to provide a way to analyze these network
-sets. 
+The `coNet` function was developed for use with replicated datasets,
+where multiple networks have been observed. Two other functions were
+written to provide a way to analyze these network sets.
 
 One function, `meanNet`, will calculate the "mean" or average of a set
 of networks. The result is the cell-wise summation of all matrices
@@ -115,7 +146,8 @@ the set of networks all have the same dimensionality and that they are
 organized into a list.
 
 ```{r}
-net.l <- lapply(1:10, function(x) matrix(runif(100), nrow = 10))
+net.l <- lapply(1:3, function(x) matrix(runif(9), nrow = 3))
+net.l
 meanNet(net.l)
 ```
 
@@ -131,5 +163,10 @@ for multivariate analyses, such as ordination.
 net.d <- distNet(net.l)
 net.d
 ```
+
+
+
+
+
 
 # References
