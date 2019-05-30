@@ -31,39 +31,11 @@ Network models are a useful representation of systems (Woodward et al.
 2010). Because it is not always possible to directly observe
 relationships (i.e. ecological interactions) spatial or temporal
 patterns of co-occurrence can be used to render models of interaction
-networks (Araújo et al. 2011). *conetto* implements an adaptation of the
-method developed by (Araújo et al. 2011) expanded with the application
-of Bayesian probability to generate network models and provides several
-functions useful for comparative analysis of sets of co-occurrence based
-networks.
-
-The Method
-==========
-
-The network modeling is based on conditional probability. Ultimately, we
-are interested in an estimate of how much one variable (A) affects
-another (B), and visa-versa. *conetto* approaches this by calculating
-the difference between the conditional and independent probabilities of
-species paris using the observed occurrences (*A* and *B*) and
-co-occurrences (*A*, *B*) of the variables of interest from a set of
-observations (*N*).
-
--   Independent probabilities (*P*(*A*)=*A*/*N* and *P*(*B*)=*B*/*N*)
--   Joint probabilities *P*(*A*, *B*)=(*A*, *B*)/*N*
--   Conditional probabilities *P*(*A*|*B*)=*P*(*B*|*A*)*P*(*A*)/*P*(*B*)
-
-Since there is uuncertainly in whether or not two species are dependent,
-*conetto* uses a interval based test to determine whether or not to use
-the observed joint probability *O*\[*P*(*A*, *B*)\] = (*A*, *B*)/*N* or
-the expected probability using an analytical null model
-*E*\[*P*(*A*, *B*)\] = *P*(*A*)*P*(*B*). Via the Chain Rule of
-probabililty *P*(*A*, *B*)=*P*(*B*|*A*)*P*(*A*), such that if
-*E*\[*P*(*A*, *B*)\] is used then
-*P*(*A*|*B*)=*P*(*A*)*P*(*B*)/*P*(*B*), which reduces to
-*P*(*A*|*B*)=*P*(*A*) and A is conditionally independent from B. We can
-then subtract the independent probability matrix from the interval test
-modified conditional probability matrix, which produces a matrix of the
-dependency among the variables of interest.
+networks (Araújo et al. 2011). *conetto* adapts a method previously
+developed for ecological networks (Araújo et al. 2011) with the
+application of Bayesian probability to generate network models and
+provides several functions useful for comparative analysis of sets of
+co-occurrence based networks.
 
 Installation
 ============
@@ -102,22 +74,19 @@ matrix. There are a couple of features that are useful to note here:
     variables is based on both their independent occurrences and their
     co-occurrences: *P*(*A*|*B*)=*P*(*A*, *B*)/*P*(*B*) and
     *P*(*B*|*A*)=*P*(*A*, *B*)/*P*(*A*).
--   Also, some values are negative. This is because the network is
-    comprised of the difference between the threshold adjusted
-    conditional probabilities minus the observed independent
-    probabilities (i.e. *P*(*A*|*B*)−*P*(*A*)). Therefore, if the
-    conditional probability is less than the observed joint probability
-    the resulting "relative" value will be negative, while the opposite
-    results in a positive value for the network. The "raw",
-    un-relativized, values can be returned via the *raw* argument.
--   Last, some of the values in the network are zero. This is because
-    `coNet` conducts a test that compares the observed co-occurrences to
-    a theoretical "null" co-occurrence interval. If the observed
+-   Some of the values in the network are zero. This is because `coNet`
+    conducts a test that compares the observed co-occurrences to a
+    theoretical "null" co-occurrence interval. If the observed
     co-occurrences are within the interval, the conditional probability
     is set equal to the joint probability. Then, when relativized, the
     resulting values are zero (i.e. *P*(*A*, *B*)−*P*(*A*, *B*)=0). The
     threshold for the null interval test can be adjusted using the
     *ci.p* argument (DEFAULT = 95).
+-   Also, some values are negative. This is because the network is
+    comprised of the difference between the interval adjusted
+    conditional probabilities and the observed independent probabilities
+    (i.e. *P*(*A*|*B*)−*P*(*A*)). The "raw", un-relativized, values can
+    be returned via the *raw* argument.
 
 Network comparisons
 -------------------
@@ -135,27 +104,27 @@ organized into a list.
     net.l <- lapply(1:3, function(x) matrix(runif(9), nrow = 3))
     net.l
     #> [[1]]
-    #>           [,1]      [,2]       [,3]
-    #> [1,] 0.2176072 0.9396594 0.03934002
-    #> [2,] 0.0253363 0.6823775 0.01446352
-    #> [3,] 0.6784387 0.9596019 0.37260966
+    #>           [,1]      [,2]      [,3]
+    #> [1,] 0.4833938 0.3077791 0.4431326
+    #> [2,] 0.8332947 0.2526010 0.4912769
+    #> [3,] 0.3381026 0.5565451 0.7095279
     #> 
     #> [[2]]
-    #>           [,1]      [,2]       [,3]
-    #> [1,] 0.7125367 0.8690468 0.03428907
-    #> [2,] 0.1678450 0.1472688 0.04872582
-    #> [3,] 0.4674624 0.7237802 0.10069652
+    #>           [,1]      [,2]      [,3]
+    #> [1,] 0.5514475 0.4504031 0.6112466
+    #> [2,] 0.7163279 0.5288370 0.4749974
+    #> [3,] 0.2749955 0.4073876 0.7451709
     #> 
     #> [[3]]
-    #>           [,1]      [,2]       [,3]
-    #> [1,] 0.9596650 0.5046081 0.96224106
-    #> [2,] 0.5379189 0.5603185 0.61608585
-    #> [3,] 0.9775682 0.3175659 0.01294727
+    #>            [,1]      [,2]      [,3]
+    #> [1,] 0.75544694 0.4456974 0.8790355
+    #> [2,] 0.06577470 0.4447598 0.1293251
+    #> [3,] 0.06913326 0.2128330 0.6785895
     meanNet(net.l)
-    #>            [,1]      [,2]       [,3]
-    #> [1,] 0.14939197 0.1828706 0.08188694
-    #> [2,] 0.05779446 0.1098786 0.05369763
-    #> [3,] 0.16786312 0.1581777 0.03843899
+    #>            [,1]       [,2]       [,3]
+    #> [1,] 0.13924552 0.09363566 0.15037764
+    #> [2,] 0.12564280 0.09537154 0.08521381
+    #> [3,] 0.05306278 0.09152679 0.16592346
 
 Another function, `distNet`, facilitates the calculation of a distance
 matrix for a set of networks. Two metrics are provided, Euclidean and
@@ -168,8 +137,36 @@ analyses, such as ordination.
     net.d <- distNet(net.l)
     net.d
     #>           1         2
-    #> 2 0.5896863          
-    #> 3 1.8480532 2.0504285
+    #> 2 0.6456985          
+    #> 3 1.4485661 1.1145369
+
+Method: Co-occurrence based network models
+==========================================
+
+The network modeling is based on conditional probability. Ultimately, we
+are interested in an estimate of how much one variable (A) affects
+another (B), and visa-versa. *conetto* approaches this by calculating
+the difference between the conditional and independent probabilities of
+species paris using the observed occurrences (*A* and *B*) and
+co-occurrences (*A*, *B*) of the variables of interest from a set of
+observations (*N*).
+
+-   Independent probabilities (*P*(*A*)=*A*/*N* and *P*(*B*)=*B*/*N*)
+-   Joint probabilities *P*(*A*, *B*)=(*A*, *B*)/*N*
+-   Conditional probabilities *P*(*A*|*B*)=*P*(*B*|*A*)*P*(*A*)/*P*(*B*)
+
+Since there is uuncertainly in whether or not two species are dependent,
+*conetto* uses a interval based test to determine whether or not to use
+the observed joint probability *O*\[*P*(*A*, *B*)\] = (*A*, *B*)/*N* or
+the expected probability using an analytical null model
+*E*\[*P*(*A*, *B*)\] = *P*(*A*)*P*(*B*). Via the Chain Rule of
+probabililty *P*(*A*, *B*)=*P*(*B*|*A*)*P*(*A*), such that if
+*E*\[*P*(*A*, *B*)\] is used then
+*P*(*A*|*B*)=*P*(*A*)*P*(*B*)/*P*(*B*), which reduces to
+*P*(*A*|*B*)=*P*(*A*) and A is conditionally independent from B. We can
+then subtract the independent probability matrix from the interval test
+modified conditional probability matrix, which produces a matrix of the
+dependency among the variables of interest.
 
 References
 ==========
