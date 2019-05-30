@@ -4,51 +4,71 @@
 \alias{coNet}
 \title{Co-occurrence based interaction network modeling.}
 \usage{
-coNet(x = "co-occurrence matrix", ci.p = 95, conditional = TRUE,
-  scale = FALSE, signs = FALSE)
+coNet(x = "co-occurrence matrix", ci.p = 95, raw = FALSE)
 }
 \arguments{
 \item{x}{A co-occurrence matrix with observations in rows and
 species in columns.}
 
-\item{ci.p}{Confidence interval probability used for edge removal
-in percent (e.g. use 95 for a nintey-five percent confidence
-interval)}
+\item{ci.p}{Interval used for edge removal in percent (e.g. use 95
+for a ninety-five percent confidence interval).}
 
-\item{conditional}{LOGICAL: should conditional probabilities be used?}
-
-\item{scale}{LOGICAL: should values be rescaled such that the
-number of co-occurrences is divided by the total number of species?}
-
-\item{signs}{LOGICAL: should the sign (positive or negative)
-of the interactions be returned?}
+\item{raw}{LOGICAL: should the original matrix of conditional
+probabilities, prior to removal of conditional probabilities
+that are within the removal interval.}
 }
 \value{
-An interaction network model in matrix form.
+An interaction network model in matrix form with
+    "non-significant" links removed and relativized to the
+    marginal probabilities (DEFAULT) or not (raw = TRUE). If
+    relativized, the matrix is the deviation of the conditional
+    probabilities from the marginal probabilities. For
+    conditional probabilities equal to the marginal
+    probabilities, this value is 0. This value can range from 1 to
+    -1, depending on the magnitude of the difference between the
+    conditional and marginal probabilities.
 }
 \description{
-Generates an interaction network model based on a matrix of co-occurrences.
-}
-\details{
-%% ~~ If necessary, more details than the description above ~~
+Generates an interaction network model based on a matrix of
+co-occurrences (i.e. repeated observations in space). This function
+is based on the method described in
+\insertCite{Araujo2011}{conetto} updated to use conditional
+probabilities.
 }
 \note{
-%% ~~further notes~~
+Given a set of repeated observations of variables
+    (e.g. biological species), a network of model of
+    interdependence is estimated using conditional probabilities
+    (\eqn{P(S_i|S_j)}). This is calculated using Bayes' Theorem, as
+    \eqn{P(S_i|S_j) = \frac{P(S_i,S_j)}{P(S_j)}}. \eqn{P(S_i,S_j)}
+    is the marginal probability, the probability of observing species
+    (\eqn{S_i} and \eqn{S_j}), which is calculated from the
+    individual probabilities of each species (\eqn{P(S)}). The
+    total abundance of each species is used to quantify the
+    individual probabilities of each species, such the \eqn{P(S_i)
+    = \frac{S_i}{N}}, where \eqn{N} is the total number of
+    observational units. The joint probabilities are similarly
+    calculated as the total number of co-occurrences divided by the
+    total number of observational units, \eqn{P(S_i,S_j) =
+    \frac{(S_i,S_j)}{N}}. For more details, such as the interval
+    based test, see \insertCite{Araujo2011}{conetto}.
 }
 \examples{
 
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
+A <- c(1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1)
+B <- c(1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1)
+C <- c(1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1)
+D <- c(0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0)
+M <- data.frame(A, B, C, D)
+coNet(M)
+
 }
 \references{
-%% ~put references to the literature/web site here ~
+\insertAllCited{}
 }
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{cond_prob}} \code{\link{cond_net}}
 }
 \author{
 Matthew K. Lau
 }
-\keyword{~kwd1}
-\keyword{~kwd2}

@@ -1,0 +1,21 @@
+# R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
+
+language: R
+cache: packages
+
+language: r
+r:
+  - oldrel
+  - release
+  - devel
+
+sudo: false
+cache: packages
+
+warnings_are_errors: true
+
+r_packages:
+  - devtools
+
+r_github_packages:
+  - ECGen/conetto

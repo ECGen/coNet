@@ -1,29 +1,29 @@
 #' Conditional probability calculator.
 #' 
-#' Calculates conditional probabilities using co-occurrences of two species.
-#' 
-#' @param a Occurrences of a species.
-#' @param b Occurrences of another species.
-#' @return Returns the conditional probabilities for each species
-#' based on the other species
-#' @note %% ~~further notes~~
+#' Calculates conditional probabilities using co-occurrences using
+#' Bayes' Theorem, such that \eqn{P(A|B) = \frac{P(A,B)}{P(B)}}, where
+#' \eqn{P(A,B) = \frac{(A,B)}{N}}, \eqn{P(B) = \frac{(B)}{N}} and
+#' \eqn{N} is the total number of observational units.
+#'
+#' @param a A set of repeated observations of occurrences.
+#' @param b Another set of repeated observations of occurrences.
+#' @return Returns the conditional probabilities.
+#' @note This is primarily a low-level function used by coNet, it may
+#'     be of interest to more advanced users.
 #' @author Matthew K. Lau
-#' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-#' @references %% ~put references to the literature/web site here ~
-#' @keywords ~kwd1 ~kwd2
 #' @examples
-#' 
-#' ##---- Should be DIRECTLY executable !! ----
-#' ##-- ==>  Define data, use random,
-#' ##--	or do  help(data=index)  for the standard data sets.
+#'
+#' A <- c(1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1)
+#' B <- c(1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1)
+#' cond_prob(A, B)
+#'
+#' C <- c(1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1)
+#' D <- c(0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0)
+#'
+#' cond_prob(C, D)
 #' 
 #' @export cond_prob
 cond_prob <- function(a, b){
-    ## P(B) = B / N
-    ## P(A) = A / N
-    ## P(A,B) = AB / N 
-    ## P(B|A) = P(A,B) / P(A)
-    ## P(A|B) = P(A,B) / P(B)
     n <- length(a)
     p.a <- sum(a) / n
     p.b <- sum(b) / n
