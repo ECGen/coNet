@@ -46,36 +46,11 @@ Network models are a useful representation of systems
 [@Woodward2010]. Because it is not always possible to directly observe
 relationships (i.e. ecological interactions) spatial or temporal
 patterns of co-occurrence can be used to render models of interaction
-networks [@Araujo2011]. *conetto* implements an adaptation of the
-method developed by [@Araujo2011] expanded with the application of
-Bayesian probability to generate network models and provides several
-functions useful for comparative analysis of sets of co-occurrence
-based networks.
-
-# The Method
-
-The network modeling is based on conditional probability. Ultimately,
-we are interested in an estimate of how much one variable (A) affects
-another (B), and visa-versa. *conetto* approaches this by calculating
-the difference between the conditional and independent probabilities
-of species paris using the observed occurrences ($A$ and $B$) and
-co-occurrences ($A,B$) of the variables of interest from a set of
-observations ($N$). 
-
-* Independent probabilities ($P(A) = A/N$ and $P(B) = B/N$) 
-* Joint probabilities $P(A,B) = (A,B) / N$
-* Conditional probabilities $P(A|B) = P(B|A) P(A) / P(B)$
-
-Since there is uuncertainly in whether or not two species are
-dependent, *conetto* uses a interval based test to determine whether
-or not to use the observed joint probability $O[P(A,B)] = (A,B)/N$ or
-the expected probability using an analytical null model $E[P(A,B)] =
-P(A)P(B)$. Via the Chain Rule of probabililty $P(A,B) = P(B|A)P(A)$,
-such that if $E[P(A,B)]$ is used then $P(A|B) = P(A)P(B) / P(B)$,
-which reduces to $P(A|B) = P(A)$ and A is conditionally independent
-from B. We can then subtract the independent probability matrix from
-the interval test modified conditional probability matrix, which
-produces a matrix of the dependency among the variables of interest.
+networks [@Araujo2011]. *conetto* adapts a method previously developed
+for ecological networks [@Araujo2011] with the application of Bayesian
+probability to generate network models and provides several functions
+useful for comparative analysis of sets of co-occurrence based
+networks.
 
 # Installation
 
@@ -115,15 +90,7 @@ matrix. There are a couple of features that are useful to note here:
   variables is based on both their independent occurrences and their
   co-occurrences: $P(A|B) = P(A,B)/P(B)$ and $P(B|A) =
   P(A,B)/P(A)$. 
-* Also, some values are negative. This is because the network is
-  comprised of the difference between the threshold adjusted
-  conditional probabilities minus the observed independent
-  probabilities (i.e. $P(A|B) - P(A)$). Therefore, if the conditional
-  probability is less than the observed joint probability the
-  resulting "relative" value will be negative, while the opposite
-  results in a positive value for the network. The "raw",
-  un-relativized, values can be returned via the *raw* argument.
-* Last, some of the values in the network are zero. This is because
+* Some of the values in the network are zero. This is because
   `coNet` conducts a test that compares the observed co-occurrences to
   a theoretical "null" co-occurrence interval. If the observed
   co-occurrences are within the interval, the conditional probability
@@ -131,6 +98,11 @@ matrix. There are a couple of features that are useful to note here:
   resulting values are zero (i.e. $P(A,B) - P(A,B) = 0$). The
   threshold for the null interval test can be adjusted using the
   *ci.p* argument (DEFAULT = 95).
+* Also, some values are negative. This is because the network is
+  comprised of the difference between the interval adjusted
+  conditional probabilities and the observed independent probabilities
+  (i.e. $P(A|B) - P(A)$). The "raw", un-relativized, values can be
+  returned via the *raw* argument.
 
 
 ## Network comparisons
@@ -164,8 +136,30 @@ net.d <- distNet(net.l)
 net.d
 ```
 
+# Method: Co-occurrence based network models
 
+The network modeling is based on conditional probability. Ultimately,
+we are interested in an estimate of how much one variable (A) affects
+another (B), and visa-versa. *conetto* approaches this by calculating
+the difference between the conditional and independent probabilities
+of species paris using the observed occurrences ($A$ and $B$) and
+co-occurrences ($A,B$) of the variables of interest from a set of
+observations ($N$). 
 
+* Independent probabilities ($P(A) = A/N$ and $P(B) = B/N$) 
+* Joint probabilities $P(A,B) = (A,B) / N$
+* Conditional probabilities $P(A|B) = P(B|A) P(A) / P(B)$
+
+Since there is uuncertainly in whether or not two species are
+dependent, *conetto* uses a interval based test to determine whether
+or not to use the observed joint probability $O[P(A,B)] = (A,B)/N$ or
+the expected probability using an analytical null model $E[P(A,B)] =
+P(A)P(B)$. Via the Chain Rule of probabililty $P(A,B) = P(B|A)P(A)$,
+such that if $E[P(A,B)]$ is used then $P(A|B) = P(A)P(B) / P(B)$,
+which reduces to $P(A|B) = P(A)$ and A is conditionally independent
+from B. We can then subtract the independent probability matrix from
+the interval test modified conditional probability matrix, which
+produces a matrix of the dependency among the variables of interest.
 
 
 
