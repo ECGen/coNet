@@ -1,6 +1,6 @@
 ---
 output: "md_document"
-bibliography: "inst/REFERENCES.bib"
+bibliography: "REFERENCES.bib"
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -58,9 +58,13 @@ the *devtools* package.
 
 ```{r eval = FALSE}
 install.packages("devtools")
-devtools::install_github("ECGen/coNet")
+devtools::install_github("ECGen/conetto")
 ```
+
 ```{r echo = FALSE}
+if (!("conetto" %in% installed.packages()[,1])){
+  devtools::install_github("ECGen/conetto", ref = "dev")
+}
 library(conetto)
 ```
 
@@ -84,12 +88,12 @@ The `coNet` function returns of square matrix with the same number of
 rows and columns equal to the number of columns in the co-occurrence
 matrix. There are a couple of features that are useful to note here:
 
-* First, the matrix is not symmetric, that is, the top and bottom
+- First, the matrix is not symmetric, that is, the top and bottom
   halves are not equal. This is because the dependency of two
   variables is based on both their independent occurrences and their
   co-occurrences: $P(A|B) = P(A,B)/P(B)$ and $P(B|A) =
   P(A,B)/P(A)$. 
-* Some of the values in the network are zero. This is because
+- Some of the values in the network are zero. This is because
   `coNet` conducts a test that compares the observed co-occurrences to
   a theoretical "null" co-occurrence interval. If the observed
   co-occurrences are within the interval, the conditional probability
@@ -97,7 +101,7 @@ matrix. There are a couple of features that are useful to note here:
   resulting values are zero (i.e. $P(A,B) - P(A,B) = 0$). The
   threshold for the null interval test can be adjusted using the
   *ci.p* argument (DEFAULT = 95).
-* Also, some values are negative. This is because the network is
+- Also, some values are negative. This is because the network is
   comprised of the difference between the interval adjusted
   conditional probabilities and the observed independent probabilities
   (i.e. $P(A|B) - P(A)$). The "raw", un-relativized, values can be
@@ -145,9 +149,9 @@ of species paris using the observed occurrences ($A$ and $B$) and
 co-occurrences ($A,B$) of the variables of interest from a set of
 observations ($N$). 
 
-* Independent probabilities ($P(A) = A/N$ and $P(B) = B/N$) 
-* Joint probabilities $P(A,B) = (A,B) / N$
-* Conditional probabilities $P(A|B) = P(B|A) P(A) / P(B)$
+- Independent probabilities ($P(A) = A/N$ and $P(B) = B/N$) 
+- Joint probabilities $P(A,B) = (A,B) / N$
+- Conditional probabilities $P(A|B) = P(B|A) P(A) / P(B)$
 
 Since there is uuncertainly in whether or not two species are
 dependent, *conetto* uses a interval based test to determine whether
