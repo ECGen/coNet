@@ -18,7 +18,6 @@ original_files <- dir()
 <!-- # ijtiff  <img src="man/figures/logo.png" height="140" align="right"> -->
 
 <!-- Code status -->
-[![Travis Build Status](https://travis-ci.org/ECGen/conetto.svg?branch=master)](https://travis-ci.org/ECGen/conetto) 
 [![Travis Build Status](https://travis-ci.org/ECGen/conetto.svg?branch=dev)](https://travis-ci.org/ECGen/conetto) 
 
 <!-- R status -->
