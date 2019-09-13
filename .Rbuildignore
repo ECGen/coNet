@@ -1,7 +1,7 @@
 CONTRIBUTE.md
 cran-comments.md
 .travis.yml
-README.rmd
+^README.Rmd
 ^paper
 ^LICENSE\.md$
 ^\.travis\.yml$
